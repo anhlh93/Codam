@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/06 14:49:54 by haile         #+#    #+#                 */
-/*   Updated: 2024/11/06 14:53:05 by haile         ########   odam.nl         */
+/*   Updated: 2024/12/06 14:35:22 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	ft_putstr(char *s, int *res)
 	i = 0;
 	if (!s)
 	{
-		write(1, "(null)", 6);
-		(*res) += 6;
+		write(1, "(nil)", 5);
+		(*res) += 5;
 		return ;
 	}
 	while (s[i])
