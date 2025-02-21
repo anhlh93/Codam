@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_putstr.c                                        :+:    :+:            */
+/*   ft_printf.h                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/11/06 14:49:54 by haile         #+#    #+#                 */
-/*   Updated: 2025/02/17 16:08:49 by haile         ########   odam.nl         */
+/*   Created: 2024/11/06 14:49:42 by haile         #+#    #+#                 */
+/*   Updated: 2024/11/20 14:27:34 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+# include "stdarg.h"
+# include "unistd.h"
+# include "stdlib.h"
 
-//string
+void		ft_putchar(char c, int *res);
+void		ft_putstr(char *s, int *res);
+void		ft_putptr(size_t ptr, int *res);
+void		ft_put_uint(unsigned int nb, int *res);
+int			ft_printf(const char *format, ...);
+void		ft_putnbr(int n, int *res);
+void		ft_puthex(unsigned int num, char c, int *res);
 
-void	ft_putstr(char *s, int *res)
-{
-	size_t	i;
-
-	i = 0;
-	if (!s)
-	{
-		write(1, "(null)", 6);
-		(*res) += 6;
-		return ;
-	}
-	while (s[i])
-	{
-		ft_putchar(s[i], res);
-		i++;
-	}
-}
+#endif

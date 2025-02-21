@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/06 14:50:46 by haile         #+#    #+#                 */
-/*   Updated: 2024/11/06 14:52:48 by haile         ########   odam.nl         */
+/*   Updated: 2025/02/17 17:58:35 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,52 @@
 char	*extract_line(int fd, char *line)
 {
 	char	*buffer;
+	char	*temp;
 	ssize_t	read_bytes;
 
 	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return (NULL);
+		return (free(line), NULL);
 	read_bytes = 1;
 	while (!ft_strchr(line, '\n') && read_bytes > 0)
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (read_bytes == -1)
-		{
-			free(buffer);
-			return (NULL);
-		}
+			return (free(line), free(buffer), NULL);
 		buffer[read_bytes] = '\0';
-		line = ft_strjoin(line, buffer);
+		temp = ft_strjoin(line, buffer);
+		if (temp == NULL)
+			return (NULL);
+		line = temp;
 	}
-	free(buffer);
-	return (line);
+	return (free(buffer), line);
 }
 
 char	*ft_get_next_line(char *line)
 {
-	char	*str;
 	int		i;
+	char	*str;
 
 	i = 0;
 	if (!line[i])
 		return (NULL);
 	while (line[i] && line[i] != '\n')
 		i++;
-	str = (char *)malloc(sizeof (char) * (i + 2));
+	str = (char *)malloc(i + 2);
 	if (!str)
-		return (NULL);
-	while (*line && *line != '\n')
-		*str++ = *line++;
-	if (*line == '\n')
-		*str++ = *line++;
-	*str = '\0';
+		return (free(line), NULL);
+	i = 0;
+	while (line[i] && line[i] != '\n')
+	{
+		str[i] = line[i];
+		i++;
+	}
+	if (line[i] == '\n')
+	{
+		str[i] = line[i];
+		i++;
+	}
+	str[i] = '\0';
 	return (str);
 }
 
@@ -73,7 +80,7 @@ char	*new_line(char *line)
 	}
 	str = (char *)malloc(sizeof(char) * (ft_strlen(line) - i + 1));
 	if (!str)
-		return (NULL);
+		return (free(line), NULL);
 	j = -1;
 	while (line[++i])
 		str[++j] = line[i];

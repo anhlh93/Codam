@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/06 14:50:41 by haile         #+#    #+#                 */
-/*   Updated: 2024/11/06 14:52:49 by haile         ########   odam.nl         */
+/*   Updated: 2025/02/17 17:19:26 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ char	*ft_strchr(char *s, int c)
 
 char	*ft_strjoin(char *line, char *buff)
 {
-	char	*new;
+	size_t	i;
+	size_t	j;
+	char	*str;
 
 	if (!line)
 	{
@@ -45,15 +47,17 @@ char	*ft_strjoin(char *line, char *buff)
 		line[0] = '\0';
 	}
 	if (!line || !buff)
-		return (NULL);
-	new = malloc(sizeof(char) * ((ft_strlen(line) + ft_strlen(buff)) + 1));
-	if (!new)
-		return (NULL);
-	while (line)
-		*new++ = *line++;
-	while (buff)
-		*new++ = *buff++;
-	*new = '\0';
-	free(line);
-	return (new);
+		return (free(line), free(buff), NULL);
+	str = malloc(sizeof(char) * ((ft_strlen(line) + ft_strlen(buff)) + 1));
+	if (str == NULL)
+		return (free(line), free(buff), NULL);
+	i = -1;
+	j = 0;
+	if (line)
+		while (line[++i] != '\0')
+			str[i] = line[i];
+	while (buff[j] != '\0')
+		str[i++] = buff[j++];
+	str[ft_strlen(line) + ft_strlen(buff)] = '\0';
+	return (free(line), str);
 }

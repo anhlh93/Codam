@@ -1,33 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_putstr.c                                        :+:    :+:            */
+/*   ft_printf_nbr.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/11/06 14:49:54 by haile         #+#    #+#                 */
-/*   Updated: 2025/02/17 16:08:49 by haile         ########   odam.nl         */
+/*   Created: 2024/11/06 14:49:15 by haile         #+#    #+#                 */
+/*   Updated: 2024/11/20 14:27:23 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-//string
+//number
 
-void	ft_putstr(char *s, int *res)
+void	ft_putnbr(int n, int *res)
 {
-	size_t	i;
-
-	i = 0;
-	if (!s)
+	if (n == -2147483648)
 	{
-		write(1, "(null)", 6);
-		(*res) += 6;
+		write(1, "-2147483648", 11);
+		(*res) += 11;
 		return ;
 	}
-	while (s[i])
+	if (n < 0)
 	{
-		ft_putchar(s[i], res);
-		i++;
+		ft_putchar('-', res);
+		ft_putnbr(n * (-1), res);
 	}
+	else
+	{
+		if (n > 9)
+			ft_putnbr(n / 10, res);
+		ft_putchar(n % 10 + '0', res);
+	}
+}
+
+//unsigned int
+
+void	ft_put_uint(unsigned int nb, int *res)
+{
+	if (nb >= 10)
+		ft_put_uint(nb / 10, res);
+	ft_putchar(nb % 10 + '0', res);
 }

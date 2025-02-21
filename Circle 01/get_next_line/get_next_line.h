@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/06 14:50:51 by haile         #+#    #+#                 */
-/*   Updated: 2024/11/06 14:52:45 by haile         ########   odam.nl         */
+/*   Updated: 2025/02/13 12:19:31 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define GET_NEXT_LINE_H
 # include "unistd.h"
 # include "stdlib.h"
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 size_t	ft_strlen(char *s);
 char	*ft_strchr(char *s, int c);
