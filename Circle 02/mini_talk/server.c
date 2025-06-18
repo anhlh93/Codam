@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/18 13:27:59 by haile         #+#    #+#                 */
-/*   Updated: 2025/06/18 14:08:45 by haile         ########   odam.nl         */
+/*   Updated: 2025/06/18 14:14:42 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ char    *ft_charjoin(char *s1, char s2)
         new[i] = s1[i];
         i++;
     }
-    tab[i++] = s2;
-    tab[i] = '\0';
+    new[i++] = s2;
+    new[i] = '\0';
     free(s1);
     return (new);
 }
@@ -55,7 +55,7 @@ void    ft_handler(int signum, siginfo_t *pid_client, void *tmp)
     static int i = 0;
     
     void(tmp);
-    mes.pid_client = pid_client->si.pid;
+    mes.pid_client = pid_client->si_pid;
     if (signum == SIGUSR1)
     {
         mes.c <<= 1;
@@ -96,6 +96,6 @@ int main(void)
         if (sigaction(SIGUSR2, &sa, NULL) == -1)
             ft_error(3);
     }
-    pause(0);
+    pause();
     return (0);
 }
