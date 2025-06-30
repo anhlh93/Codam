@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/18 13:27:59 by haile         #+#    #+#                 */
-/*   Updated: 2025/06/30 13:13:33 by haile         ########   odam.nl         */
+/*   Updated: 2025/06/30 15:14:22 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_handler(int signum, siginfo_t *pid_client, void *tmp)
 			free(g_mes.message);
 			g_mes.message = NULL;
 			kill(g_mes.pid_client, SIGUSR1);
-			usleep(900);
+			usleep(300);
 		}
 		i = 0;
 	}
