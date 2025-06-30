@@ -53,8 +53,8 @@ void    ft_error(int i)
 void    ft_handler(int signum, siginfo_t *pid_client, void *tmp)
 {
     static int i = 0;
-    
-    void(tmp);
+
+    (void)tmp;
     mes.pid_client = pid_client->si_pid;
     if (signum == SIGUSR1)
     {
@@ -78,7 +78,7 @@ void    ft_handler(int signum, siginfo_t *pid_client, void *tmp)
         i = 0;
     }
 }
-    
+
 int main(void)
 {
     struct sigaction    sa;
