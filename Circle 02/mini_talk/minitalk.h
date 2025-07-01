@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/18 12:24:32 by haile         #+#    #+#                 */
-/*   Updated: 2025/06/30 10:42:31 by haianhle         ###   ########.fr       */
+/*   Updated: 2025/07/02 01:45:14 by haianhle      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		ft_atoi(const char *str);
 void	signal_to_client(int signum);
 void	ft_error(int i);
 void	signal_to_server(char s, int pid);
+void	wait_for_signal(void);
 char	*ft_charjoin(char *s1, char s2);
 void	ft_sperror(int i);
 void	ft_handler(int signum, siginfo_t *pid_client, void *tmp);

@@ -6,59 +6,38 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/18 12:29:34 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/01 16:36:20 by haianhle      ########   odam.nl         */
+/*   Updated: 2025/07/02 01:46:16 by haianhle      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-volatile int	g_signal_received = 0;
-
-int	ft_atoi(const char *str)
-{
-	int	res;
-	int	sign;
-
-	res = 0;
-	sign = 1;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			sign *= -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		res = res * 10 + (*str - '0');
-		str++;
-	}
-	return (res * sign);
-}
+volatile int	g_signal_back = 0;
 
 void	signal_to_client(int signum)
 {
 	if (signum == SIGUSR1)
 	{
 		ft_printf("Message sent successfully");
-		exit (EXIT_SUCCESS);
+		exit(EXIT_SUCCESS);
 	}
 	else
-		g_signal_received = 1;
+		g_signal_back = 1;
 }
+
 void	wait_for_signal(void)
 {
-	int	timeout = 0;
+	int	timeout;
 
-	while (!g_signal_received && timeout < 1000000)
+	timeout = 0;
+	while (!g_signal_back && timeout < 10000)
 	{
-		usleep(1);
+		usleep(100);
 		timeout++;
 	}
-	if (!g_signal_received)
+	if (!g_signal_back)
 		ft_error(5);
-	g_signal_received = 0;
+	g_signal_back = 0;
 }
 
 void	ft_error(int i)

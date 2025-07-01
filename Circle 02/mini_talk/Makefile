@@ -6,15 +6,15 @@
 #    By: haile <haile@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2025/06/18 12:06:14 by haile         #+#    #+#                  #
-#    Updated: 2025/06/18 12:23:22 by haile         ########   odam.nl          #
+#    Updated: 2025/07/02 01:43:42 by haianhle      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 SERVER = server
 CLIENT = client
 
-SRC_SERVER = server.c
-SRC_CLIENT = client.c
+SRC_SERVER = server.c utils.c
+SRC_CLIENT = client.c utils.c
 SRC_PRINTF = ft_printf/ft_printf_nbr.c \
              ft_printf/ft_printf_ptr.c \
              ft_printf/ft_printf.c \

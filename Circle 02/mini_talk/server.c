@@ -6,37 +6,13 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/18 13:27:59 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/01 11:19:11 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/02 01:52:14 by haianhle      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
 t_struct	g_mes;
-
-char	*ft_charjoin(char *s1, char s2)
-{
-	int		size;
-	int		i;
-	char	*new;
-
-	i = 0;
-	size = 0;
-	while (s1 && s1[size])
-		size++;
-	new = malloc(sizeof(char) * (size + 2));
-	if (new == NULL)
-		return (NULL);
-	while (s1 && s1[i])
-	{
-		new[i] = s1[i];
-		i++;
-	}
-	new[i++] = s2;
-	new[i] = '\0';
-	free(s1);
-	return (new);
-}
 
 void	ft_error(int i)
 {
@@ -48,7 +24,16 @@ void	ft_error(int i)
 		ft_printf("ERROR: Sigaction error");
 	else if (i == 4)
 		ft_printf("ERROR: kill function error");
-	exit (EXIT_FAILURE);
+	else if (i == 6)
+		ft_printf("ERROR: Memory allocation failed\n");
+	exit(EXIT_FAILURE);
+}
+
+void	ft_addchar(void)
+{
+	g_mes.message = ft_charjoin(g_mes.message, g_mes.c);
+	if (!g_mes.message)
+		ft_error(6);
 }
 
 void	ft_handler(int signum, siginfo_t *pid_client, void *tmp)
@@ -57,26 +42,26 @@ void	ft_handler(int signum, siginfo_t *pid_client, void *tmp)
 
 	(void)tmp;
 	g_mes.pid_client = pid_client->si_pid;
+	g_mes.c <<= 1;
 	if (signum == SIGUSR1)
-	{
-		g_mes.c <<= 1;
 		g_mes.c |= 1;
-	}
-	else
-		g_mes.c <<= 1;
-	i++;
+	if (kill(g_mes.pid_client, SIGUSR2) == -1)
+		ft_error(4);
 	if (i == 8)
 	{
 		g_mes.message = ft_charjoin(g_mes.message, g_mes.c);
-		if (!g_mes.c)
+		if (g_mes.c == '\0')
 		{
 			ft_printf("%s\n", g_mes.message);
 			free(g_mes.message);
 			g_mes.message = NULL;
-			kill(g_mes.pid_client, SIGUSR1);
-			usleep(500);
+			if (kill(g_mes.pid_client, SIGUSR1) == -1)
+				ft_error(4);
 		}
+		else
+			ft_addchar();
 		i = 0;
+		g_mes.c = 0;
 	}
 }
 
@@ -87,9 +72,12 @@ int	main(void)
 
 	pid = getpid();
 	ft_printf("Current PID of server: %d\n", pid);
+	g_mes.message = NULL;
+	g_mes.c = 0;
+	g_mes.pid_client = 0;
 	sa.sa_sigaction = ft_handler;
 	sa.sa_flags = SA_SIGINFO;
-	g_mes.message = NULL;
+	sigemptyset(&sa.sa_mask);
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 		ft_error(3);
 	if (sigaction(SIGUSR2, &sa, NULL) == -1)
