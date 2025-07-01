@@ -6,13 +6,13 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/18 12:29:34 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/01 11:14:30 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/01 16:36:20 by haianhle      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-unsigned int	g_bitsend = 0;
+volatile int	g_signal_received = 0;
 
 int	ft_atoi(const char *str)
 {
@@ -40,7 +40,25 @@ int	ft_atoi(const char *str)
 void	signal_to_client(int signum)
 {
 	if (signum == SIGUSR1)
-		ft_printf("%d bits succesfully sent", g_bitsend);
+	{
+		ft_printf("Message sent successfully");
+		exit (EXIT_SUCCESS);
+	}
+	else
+		g_signal_received = 1;
+}
+void	wait_for_signal(void)
+{
+	int	timeout = 0;
+
+	while (!g_signal_received && timeout < 1000000)
+	{
+		usleep(1);
+		timeout++;
+	}
+	if (!g_signal_received)
+		ft_error(5);
+	g_signal_received = 0;
 }
 
 void	ft_error(int i)
@@ -53,6 +71,8 @@ void	ft_error(int i)
 		ft_printf("ERROR: Sigaction error");
 	else if (i == 4)
 		ft_printf("ERROR: kill function error");
+	else if (i == 5)
+		ft_printf("ERROR: Server timeout");
 	exit(EXIT_FAILURE);
 }
 
@@ -73,7 +93,7 @@ void	signal_to_server(char s, int pid)
 			if (kill(pid, SIGUSR2) != 0)
 				ft_error(4);
 		}
-		usleep(500);
+		wait_for_signal();
 		i--;
 	}
 }
@@ -87,19 +107,18 @@ int	main(int ac, char **av)
 	if (ac != 3)
 		ft_error(1);
 	sa.sa_handler = signal_to_client;
-	i = 0;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
 	pid_server = ft_atoi(av[1]);
 	if (pid_server <= 0)
 		ft_error(2);
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 		ft_error(3);
-	while (av[2][i])
-	{
+	if (sigaction(SIGUSR2, &sa, NULL) == -1)
+		ft_error(3);
+	i = -1;
+	while (av[2][++i])
 		signal_to_server(av[2][i], pid_server);
-		i++;
-		g_bitsend += 8;
-	}
 	signal_to_server('\0', pid_server);
-	g_bitsend += 8;
 	return (0);
 }
