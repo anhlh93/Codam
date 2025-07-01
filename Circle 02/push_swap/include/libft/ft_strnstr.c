@@ -1,0 +1,67 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ft_strnstr.c                                        :+:    :+:           */
+/*                                                     +:+                    */
+/*   By: haile <haile@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/11/06 10:46:19 by haile         #+#    #+#                 */
+/*   Updated: 2024/11/06 13:43:39 by haile          ########   odam.nl        */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_strnstr(const char *ls, const char *ss, size_t n)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	if (!ss && !ls)
+		return (NULL);
+	if (ss[0] == '\0')
+		return ((char *)ls);
+	while (ls[i] != '\0')
+	{
+		j = 0;
+		while ((i + j) < n && ls[i + j] == ss[j])
+		{
+			if (ls[i + j] == '\0')
+				return ((char *)ls + i);
+			j++;
+		}
+		if (ss[j] == '\0')
+			return ((char *)ls + i);
+		i++;
+	}
+	return (NULL);
+}
+/*
+j == ft_strlen(ss) equals ss[j] == "/0" 
+*/
+/*
+#include <string.h>
+#include <stdio.h>
+
+int	main(void)
+{
+	const char	largestring[20] = "Foo Bar Baz";
+	const char	smallstring[10] = "Bar";
+	char	*ptr;
+
+	ptr = ft_strnstr(largestring, smallstring, 4);
+	printf("String after locates little string |%s| is - |%s|\n", 
+	smallstring, ptr);
+	return (0);
+}
+*/
+/*
+** If needle is an empty string, haystack is returned;
+** if needle occurs nowhere in haystack, NULL is returned;
+** otherwise a pointer to the first character 
+** of the first occurrence of needle is returned.
+** The strnstr() function locates the first occurrence of 
+** the null-terminated string needle in the string haystack, 
+** where not more than len characters are searched.
+*/
