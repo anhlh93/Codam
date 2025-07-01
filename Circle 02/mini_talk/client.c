@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/18 12:29:34 by haile         #+#    #+#                 */
-/*   Updated: 2025/06/30 13:12:17 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/01 11:14:30 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	signal_to_server(char s, int pid)
 			if (kill(pid, SIGUSR2) != 0)
 				ft_error(4);
 		}
-		usleep(900);
+		usleep(500);
 		i--;
 	}
 }

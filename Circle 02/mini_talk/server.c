@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/18 13:27:59 by haile         #+#    #+#                 */
-/*   Updated: 2025/06/30 15:14:22 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/01 11:19:11 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_error(int i)
 	if (i == 1)
 		ft_printf("ERROR: Invalid argument");
 	else if (i == 2)
-		ft_printf("ERROR: Non - positive PID");
+		ft_printf("ERROR: Bad PID");
 	else if (i == 3)
 		ft_printf("ERROR: Sigaction error");
 	else if (i == 4)
@@ -74,7 +74,7 @@ void	ft_handler(int signum, siginfo_t *pid_client, void *tmp)
 			free(g_mes.message);
 			g_mes.message = NULL;
 			kill(g_mes.pid_client, SIGUSR1);
-			usleep(300);
+			usleep(500);
 		}
 		i = 0;
 	}
