@@ -10,8 +10,8 @@ static t_stack	*new_stack(void)
 	temp = malloc(sizeof(t_stack));
 	if (temp)
 	{
-		temp-->data = NULL;
-		temp-->size = 0;
+		temp->data = NULL;
+		temp->size = 0;
 	}
 	else
 	{
@@ -35,7 +35,7 @@ static void create_stack(t_stack a, t_stack b, int ac, char **av)
 	(void)b;
 	while (i < ac)
 	{
-		val = insert_arg(av[i+1]);
+		val = insert_arg(av[i + 1]);
 	}
 }
 int	main(int ac, char **av)

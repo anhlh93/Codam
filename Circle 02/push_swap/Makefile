@@ -4,6 +4,8 @@ LIBFT	= include/libft
 PRINTF	= include/ft_printf
 HEADER	= include/
 
+# Include getnextline in LIBFT folder
+
 SRCS	= ./src/handle.c \
 			./src/main.c \
 			./src/operations/push.c \
@@ -27,7 +29,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT)
 	$(MAKE) -C $(PRINTF)
-	$(CC) -o $(NAME) $(CFLAGS) $(OBJS) $(LIBFT)/libft.a $(PRINTF)/libftprintf.z
+	$(CC) -o $(NAME) $(CFLAGS) $(OBJS) $(LIBFT)/libft.a $(PRINTF)/libftprintf.a
 
 # Clean object files
 clean:
@@ -36,6 +38,7 @@ clean:
 # Clean library file
 fclean: clean
 	$(MAKE) -C $(LIBFT) fclean
+	$(MAKE) -C $(PRINTF) fclean
 	rm -f $(NAME)
 
 # Re-compile
