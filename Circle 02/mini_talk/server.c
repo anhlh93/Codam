@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/18 13:27:59 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/02 11:46:40 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/02 12:07:38 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_struct	g_mes;
 
-void	ft_error(int i)
+void	ft_server_error(int i)
 {
 	if (i == 1)
 		ft_printf("ERROR: Invalid argument");
@@ -39,6 +39,25 @@ void	ft_addchar(void)
 	g_mes.message = temp;
 }
 
+void	sub_handler(void)
+{
+	if (g_mes.c == '\0')
+	{
+		if (g_mes.message)
+		{
+			ft_printf("%s\n", g_mes.message);
+			free(g_mes.message);
+			g_mes.message = NULL;
+		}
+		else
+			ft_printf("\n");
+		if (kill(g_mes.pid_client, SIGUSR1) == -1)
+			ft_error(4);
+	}
+	else
+		ft_addchar();
+}
+
 void	ft_handler(int signum, siginfo_t *pid_client, void *tmp)
 {
 	static int	i = 0;
@@ -52,23 +71,7 @@ void	ft_handler(int signum, siginfo_t *pid_client, void *tmp)
 		ft_error(4);
 	if (++i == 8)
 	{
-		if (g_mes.c == '\0')
-		{
-			if(g_mes.message)
-			{
-				ft_printf("%s\n", g_mes.message);
-				free(g_mes.message);
-				g_mes.message = NULL;
-			}
-			else
-			{
-				ft_printf("\n");
-			}
-			if (kill(g_mes.pid_client, SIGUSR1) == -1)
-				ft_error(4);
-		}
-		else
-			ft_addchar();
+		sub_handler();
 		i = 0;
 		g_mes.c = 0;
 	}
@@ -87,8 +90,8 @@ int	main(void)
 	sa.sa_sigaction = ft_handler;
 	sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
-	sigaddset(&sa.sa_mask, SIGUSR1); 
-    sigaddset(&sa.sa_mask, SIGUSR2); 
+	sigaddset(&sa.sa_mask, SIGUSR1);
+	sigaddset(&sa.sa_mask, SIGUSR2);
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 		ft_error(3);
 	if (sigaction(SIGUSR2, &sa, NULL) == -1)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haianhle <haianhle@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/02 01:22:34 by haianhle      #+#    #+#                 */
-/*   Updated: 2025/07/02 01:50:20 by haianhle         ###   ########.fr       */
+/*   Updated: 2025/07/02 11:52:53 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ char	*ft_charjoin(char *s1, char s2)
 		size++;
 	new = malloc(sizeof(char) * (size + 2));
 	if (new == NULL)
+	{
+		free(s1);
 		return (NULL);
+	}
 	while (s1 && s1[i])
 	{
 		new[i] = s1[i];
