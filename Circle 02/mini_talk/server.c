@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/18 13:27:59 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/02 01:52:14 by haianhle      ########   odam.nl         */
+/*   Updated: 2025/07/02 10:37:38 by haianhle      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ void	ft_error(int i)
 
 void	ft_addchar(void)
 {
-	g_mes.message = ft_charjoin(g_mes.message, g_mes.c);
-	if (!g_mes.message)
+	char	*temp;
+
+	temp = ft_charjoin(g_mes.message, g_mes.c);
+	if (!temp)
 		ft_error(6);
+	g_mes.message = temp;
 }
 
 void	ft_handler(int signum, siginfo_t *pid_client, void *tmp)
@@ -47,14 +50,20 @@ void	ft_handler(int signum, siginfo_t *pid_client, void *tmp)
 		g_mes.c |= 1;
 	if (kill(g_mes.pid_client, SIGUSR2) == -1)
 		ft_error(4);
-	if (i == 8)
+	if (++i == 8)
 	{
-		g_mes.message = ft_charjoin(g_mes.message, g_mes.c);
 		if (g_mes.c == '\0')
 		{
-			ft_printf("%s\n", g_mes.message);
-			free(g_mes.message);
-			g_mes.message = NULL;
+			if(g_mes.message)
+			{
+				ft_printf("%s\n", g_mes.message);
+				free(g_mes.message);
+				g_mes.message = NULL;
+			}
+			else
+			{
+				ft_printf("\n");
+			}
 			if (kill(g_mes.pid_client, SIGUSR1) == -1)
 				ft_error(4);
 		}

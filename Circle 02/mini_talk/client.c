@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/18 12:29:34 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/02 01:46:16 by haianhle      ########   odam.nl         */
+/*   Updated: 2025/07/02 10:53:28 by haianhle      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	signal_to_client(int signum)
 		ft_printf("Message sent successfully");
 		exit(EXIT_SUCCESS);
 	}
-	else
+	else if (signum == SIGUSR2)
 		g_signal_back = 1;
 }
 
@@ -30,9 +30,9 @@ void	wait_for_signal(void)
 	int	timeout;
 
 	timeout = 0;
-	while (!g_signal_back && timeout < 10000)
+	while (!g_signal_back && timeout < 50000)
 	{
-		usleep(100);
+		usleep(10);
 		timeout++;
 	}
 	if (!g_signal_back)
@@ -51,7 +51,7 @@ void	ft_error(int i)
 	else if (i == 4)
 		ft_printf("ERROR: kill function error");
 	else if (i == 5)
-		ft_printf("ERROR: Server timeout");
+		ft_printf("ERROR: Server timeout - no acknowledgement from server");
 	exit(EXIT_FAILURE);
 }
 
@@ -82,6 +82,7 @@ int	main(int ac, char **av)
 	int					i;
 	int					pid_server;
 	struct sigaction	sa;
+	int					message_len;
 
 	if (ac != 3)
 		ft_error(1);
@@ -95,9 +96,23 @@ int	main(int ac, char **av)
 		ft_error(3);
 	if (sigaction(SIGUSR2, &sa, NULL) == -1)
 		ft_error(3);
+	// Get message length for progress indication
+	message_len = 0;
+	while (av[2][message_len])
+		message_len++;
+
+	ft_printf("Sending message to server (PID: %d): \"%s\"\n", pid_server, av[2]);
+	ft_printf("Message length: %d characters\n", message_len);
+	//DEBUG
 	i = -1;
 	while (av[2][++i])
+	{
+		ft_printf("Sending character %d/%d: '%c'\n", i + 1, message_len, av[2][i]);
 		signal_to_server(av[2][i], pid_server);
+	}
+	ft_printf("Sending null terminator...\n");
 	signal_to_server('\0', pid_server);
+	ft_printf("Waiting for server confirmation...\n");
+	pause();
 	return (0);
 }
