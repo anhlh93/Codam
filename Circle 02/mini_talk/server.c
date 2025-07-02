@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/18 13:27:59 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/02 12:07:38 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/02 12:11:46 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_addchar(void)
 
 	temp = ft_charjoin(g_mes.message, g_mes.c);
 	if (!temp)
-		ft_error(6);
+		ft_server_error(6);
 	g_mes.message = temp;
 }
 
@@ -52,7 +52,7 @@ void	sub_handler(void)
 		else
 			ft_printf("\n");
 		if (kill(g_mes.pid_client, SIGUSR1) == -1)
-			ft_error(4);
+			ft_server_error(4);
 	}
 	else
 		ft_addchar();
@@ -68,7 +68,7 @@ void	ft_handler(int signum, siginfo_t *pid_client, void *tmp)
 	if (signum == SIGUSR1)
 		g_mes.c |= 1;
 	if (kill(g_mes.pid_client, SIGUSR2) == -1)
-		ft_error(4);
+		ft_server_error(4);
 	if (++i == 8)
 	{
 		sub_handler();
@@ -93,9 +93,9 @@ int	main(void)
 	sigaddset(&sa.sa_mask, SIGUSR1);
 	sigaddset(&sa.sa_mask, SIGUSR2);
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
-		ft_error(3);
+		ft_server_error(3);
 	if (sigaction(SIGUSR2, &sa, NULL) == -1)
-		ft_error(3);
+		ft_server_error(3);
 	while (12)
 	{
 		pause();

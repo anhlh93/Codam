@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/18 12:29:34 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/02 12:07:58 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/02 12:11:30 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	wait_for_signal(void)
 		timeout++;
 	}
 	if (!g_signal_back)
-		ft_error(5);
+		ft_client_error(5);
 	g_signal_back = 0;
 }
 
@@ -65,12 +65,12 @@ void	signal_to_server(char s, int pid)
 		if (s & 1 << i)
 		{
 			if (kill(pid, SIGUSR1) != 0)
-				ft_error(4);
+				ft_client_error(4);
 		}
 		else
 		{
 			if (kill(pid, SIGUSR2) != 0)
-				ft_error(4);
+				ft_client_error(4);
 		}
 		wait_for_signal();
 		i--;
@@ -84,17 +84,17 @@ int	main(int ac, char **av)
 	struct sigaction	sa;
 
 	if (ac != 3)
-		ft_error(1);
+		ft_client_error(1);
 	sa.sa_handler = signal_to_client;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	pid_server = ft_atoi(av[1]);
 	if (pid_server <= 0)
-		ft_error(2);
+		ft_client_error(2);
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
-		ft_error(3);
+		ft_client_error(3);
 	if (sigaction(SIGUSR2, &sa, NULL) == -1)
-		ft_error(3);
+		ft_client_error(3);
 	i = -1;
 	while (av[2][++i])
 		signal_to_server(av[2][i], pid_server);
