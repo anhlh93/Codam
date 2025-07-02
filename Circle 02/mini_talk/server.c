@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/18 13:27:59 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/02 10:37:38 by haianhle      ########   odam.nl         */
+/*   Updated: 2025/07/02 11:46:40 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	main(void)
 	sa.sa_sigaction = ft_handler;
 	sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
+	sigaddset(&sa.sa_mask, SIGUSR1); 
+    sigaddset(&sa.sa_mask, SIGUSR2); 
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 		ft_error(3);
 	if (sigaction(SIGUSR2, &sa, NULL) == -1)
