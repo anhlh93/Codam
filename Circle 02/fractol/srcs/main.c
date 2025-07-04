@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/04 13:58:04 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/04 15:03:50 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/04 16:45:42 by haianhle      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	main(int ac, char **av)
 {
 	t_canvas	canvas;
 
-	if (ac != 2 || (!av[1][0] == '0' || !av[1][0] == '1' || !av[1][0] == '2'
-			|| !av[1][1] == '\0'))
+	if (ac != 2 || (!(av[1][0] == '0') || !(av[1][0] == '1')
+			|| !(av[1][0] == '2') || (!av[1][1]) == '\0'))
 	{
 		ft_putstr_fd(INVALID_ARG_MSG, STDOUT_FILENO);
 		return (1);
