@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlcpy.c                                       :+:    :+:            */
+/*   ultis.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/11/06 10:45:47 by haile         #+#    #+#                 */
-/*   Updated: 2024/11/06 13:25:41 by haile         ########   odam.nl         */
+/*   Created: 2025/07/04 13:58:10 by haile         #+#    #+#                 */
+/*   Updated: 2025/07/04 15:04:40 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fractol.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+void	ft_putstr_fd(char *str, int fd)
 {
-	size_t	i;
+	size_t	len;
 
-	i = 0;
-	if (size > 0)
+	if (str == NULL)
+		return ;
+	len = 0;
+	while (str[len] != '\0')
+		len++;
+	while (len > INT_MAX)
 	{
-		while (i < size - 1 && src[i])
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = 0;
+		write(fd, str, INT_MAX);
+		str += INT_MAX;
+		len -= INT_MAX;
 	}
-	while (src[i])
-		i++;
-	return (i);
+	write(fd, str, len);
 }
-/*
-#include <stdio.h>
-int	main()
+
+double	abs_double(double val)
 {
-	char src[] = "World!";
-	char dest[] = "Hello ";
-	printf("%d | %s", ft_strlcpy(dest, src, 10), dest);
+	if (val < 0)
+		return (-val);
+	return (val);
 }
-*/
+
+double	squared(double num)
+{
+	return (num * num);
+}

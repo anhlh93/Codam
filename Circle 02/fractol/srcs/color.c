@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_isalpha.c                                       :+:    :+:            */
+/*   color.c                                             :+:    :+:           */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/11/06 09:59:29 by haile         #+#    #+#                 */
-/*   Updated: 2024/11/06 10:03:34 by haile         ########   odam.nl         */
+/*   Created: 2025/07/04 14:56:53 by haile         #+#    #+#                 */
+/*   Updated: 2025/07/04 15:02:48 by haile          ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fractol.h"
 
-int	ft_isalpha(int c)
+uint32_t	convert_rgb_hex(int r, int g, int b)
 {
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-		return (1);
-	return (0);
+	uint32_t	color;
+
+	color = 0;
+	color |= b;
+	color |= g << 8;
+	color |= r << 16;
+	return (color);
+}
+
+uint32_t	simple_colorizer(int iter, t_canvas *canvas)
+{
+	int	a;
+
+	a = (int)((double)iter / canvas->max_iter * 255);
+	return (convert_rgb_hex(a, a, a));
 }

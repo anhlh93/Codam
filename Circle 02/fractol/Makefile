@@ -1,43 +1,49 @@
-SERVER = server
-CLIENT = client
-
-SRC_SERVER = server.c utils.c
-SRC_CLIENT = client.c utils.c
-SRC_PRINTF = ft_printf/ft_printf_nbr.c \
-             ft_printf/ft_printf_ptr.c \
-             ft_printf/ft_printf.c \
-             ft_printf/ft_puthex.c \
-             ft_printf/ft_putstr.c
-
-# Define object files for each component
-OBJ_SERVER = $(SRC_SERVER:.c=.o)
-OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
-OBJ_PRINTF = $(SRC_PRINTF:.c=.o)
-
+NAME = fractol
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-RM = rm -rf
+CFLAGS = -Werror -Wall -Wextra
+INC=/usr/include
+INCLIB=$(INC)/../lib
+MLX_PATH = ./minilibx-linux
+MLX_LIB = -L$(MLX_PATH) -lmlx
 
-all: $(SERVER) $(CLIENT)
+FILES = main.c \
+  canvas.c \
+  color.c \
+  utils.c \
+  key_hooks.c \
+  mouse_hooks.c \
+  draw.c
+OBJDIR   = objs
+SRCDIR   = srcs
+SRCS	 = $(addprefix $(SRCDIR)/, $(FILES))
+OBJS	 = $(addprefix $(OBJDIR)/, $(FILES:.c=.o))
+INCLUDES = includes
 
-# Build server from object files
-$(SERVER): $(OBJ_SERVER) $(OBJ_PRINTF)
-	$(CC) $(CFLAGS) -o $(SERVER) $(OBJ_SERVER) $(OBJ_PRINTF)
+all: $(NAME)
 
-# Build client from object files
-$(CLIENT): $(OBJ_CLIENT) $(OBJ_PRINTF)
-	$(CC) $(CFLAGS) -o $(CLIENT) $(OBJ_CLIENT) $(OBJ_PRINTF)
+$(NAME): $(MLX_PATH) $(OBJDIR) $(OBJS)
+	$(CC) -o $(NAME) $(OBJS) $(MLX_LIB) -L$(INCLIB) -lXext -lX11 -lm -lbsd
 
-# Rule to compile .c files to .o files
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
+
+$(MLX_PATH):
+	git clone https://github.com/42Paris/minilibx-linux.git $(MLX_PATH)
+	make -C $(MLX_PATH)
+
+$(OBJDIR):
+	mkdir -p $@
 
 clean:
-	$(RM) $(OBJ_SERVER) $(OBJ_CLIENT) $(OBJ_PRINTF)
+	${RM} ${OBJS}
 
 fclean: clean
-	$(RM) $(SERVER) $(CLIENT)
+	${RM} ${NAME}
 
 re: fclean all
+
+norm:
+	norminette $(SRCS)
+	norminette $(INCLUDES)
 
 .PHONY: all clean fclean re
