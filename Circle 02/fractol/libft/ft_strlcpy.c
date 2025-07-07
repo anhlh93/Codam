@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   color.c                                             :+:    :+:           */
+/*   ft_strlcpy.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/07/04 14:56:53 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/04 15:02:48 by haile          ########   odam.nl        */
+/*   Created: 2024/11/06 10:45:47 by haile         #+#    #+#                 */
+/*   Updated: 2024/11/06 13:25:41 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "libft.h"
 
-uint32_t	convert_rgb_hex(int r, int g, int b)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	uint32_t	color;
+	size_t	i;
 
-	color = 0;
-	color |= b;
-	color |= g << 8;
-	color |= r << 16;
-	return (color);
+	i = 0;
+	if (size > 0)
+	{
+		while (i < size - 1 && src[i])
+		{
+			dest[i] = src[i];
+			i++;
+		}
+		dest[i] = 0;
+	}
+	while (src[i])
+		i++;
+	return (i);
 }
-
-uint32_t	simple_colorizer(int iter, t_canvas *canvas)
+/*
+#include <stdio.h>
+int	main()
 {
-	int	a;
-
-	a = (int)((double)iter / canvas->max_iter * 255);
-	return (convert_rgb_hex(a, a, a));
+	char src[] = "World!";
+	char dest[] = "Hello ";
+	printf("%d | %s", ft_strlcpy(dest, src, 10), dest);
 }
+*/

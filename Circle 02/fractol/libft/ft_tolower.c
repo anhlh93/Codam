@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_tolower.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/07/04 13:58:04 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:19:36 by haile         ########   odam.nl         */
+/*   Created: 2024/11/06 10:46:42 by haile         #+#    #+#                 */
+/*   Updated: 2024/11/06 13:12:35 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+int	ft_tolower(int c)
 {
-	t_fractol	fractol;
+	if (c >= 65 && c <= 90)
+		c += 32;
+	return (c);
+}
+/*
+int	main(void)
+{
+	char	c;
 
-	if (parsing_arg(&fractol, ac, av))
-	{
-		print_controls();
-		window_init(&fractol);
-		render(&fractol);
-		event_management(&fractol);
-		mlx_loop(fractol.utils.ptr);
-	}
-	else
-		show_options();
+	c = 'm';
+	printf("%c -> %c", c, tolower(c));
+	c = 'D';
+	printf("\n%c -> %c", c, tolower(c));
+	c = '9';
+	printf("\n%c -> %c", c, tolower(c));
+	c = 'm';
+	printf("\n%c -> %c", c, ft_tolower(c));
+	c = 'D';
+	printf("\n%c -> %c", c, ft_tolower(c));
+	c = '9';
+	printf("\n%c -> %c", c, ft_tolower(c));
 	return (0);
 }
+*/

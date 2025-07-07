@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_strlen.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/07/04 13:58:04 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:19:36 by haile         ########   odam.nl         */
+/*   Created: 2024/11/06 10:45:54 by haile         #+#    #+#                 */
+/*   Updated: 2024/11/06 13:19:46 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+size_t	ft_strlen(const char *str)
 {
-	t_fractol	fractol;
+	size_t	i;
 
-	if (parsing_arg(&fractol, ac, av))
+	i = 0;
+	while (str[i])
 	{
-		print_controls();
-		window_init(&fractol);
-		render(&fractol);
-		event_management(&fractol);
-		mlx_loop(fractol.utils.ptr);
+		i++;
 	}
-	else
-		show_options();
-	return (0);
+	return (i);
 }
+/*
+#include <stdio.h>
+int	main()
+{
+	printf("%i", ft_strlen("854asdfafdsa"));
+}
+*/

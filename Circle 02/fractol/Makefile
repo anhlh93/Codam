@@ -1,49 +1,107 @@
-NAME := fractol
-CC := cc
-CFLAGS := -Werror -Wall -Wextra
-INC:=/usr/include
-INCLIB:=$(INC)/../lib
-MLX_PATH := ./minilibx-linux
-MLX_LIB := -L$(MLX_PATH) -lmlx
+#Colors / base 16 / Bright
+DEF_COLOR	= \033[0;39m
+GRAY		= \033[0;90m
+RED			= \033[0;91m
+GREEN		= \033[0;92m
+YELLOW		= \033[0;93m
+BLUE		= \033[0;94m
+MAGENTA		= \033[0;95m
+CYAN		= \033[0;96m
+WHITE		= \033[0;97m
 
-FILES := main.c \
-  canvas.c \
-  color.c \
-  ultis.c \
-  key_hooks.c \
-  mouse_hooks.c \
-  draw.c \
-OBJDIR   := objs
-SRCDIR   := srcs
-SRCS	 := $(addprefix $(SRCDIR)/, $(FILES))
-OBJS	 := $(addprefix $(OBJDIR)/, $(FILES:.c:=.o))
-INCLUDES := includes
+#Colors / Perso / Bright
+ORANGE		= \033[38;5;214m
 
-all: $(NAME)
+#MinilibX
+MLX_DIR		= minilibx-linux/
+MLX_NAME	= libmlx.a
+MLX			= $(MLX_DIR)$(MLX_NAME)
 
-$(NAME): $(MLX_PATH) $(OBJDIR) $(OBJS)
-	$(CC) -o $(NAME) $(OBJS) $(MLX_LIB) -L$(INCLIB) -lXext -lX11 -lm -lbsd
+#Libft
+LIBFT_DIR	= libft/
+LIBFT_NAME	= libft.a
+LIBFT		= $(LIBFT_DIR)$(LIBFT_NAME)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@
+#Variables
+NAME		= fractol
+CC			= cc
+FLAGS		= -Wall -Werror -Wextra
+RM			= rm -f
+AR			= ar rcs
 
-$(MLX_PATH):
-	git clone https://github.com/42Paris/minilibx-linux.git $(MLX_PATH)
-	make -C $(MLX_PATH)
+NORM		= ./includes\
+			  ./libft/include/\
+			  ./libft/src_lib
 
-$(OBJDIR):
-	mkdir -p $@
+INCLUDE		= -I ./includes/\
+			  -I ./libft/include/\
+			  -I ./$(MLX_DIR)
+
+#Sources
+OBJ_DIR_F	= obj/
+SRC_DIR_F	= src/
+
+SRC_FUNCTIONS_F = close_program colors events extra_keyboard_actions \
+				  full_default_init main movements_in_window parsing \
+				  render utils_init fractals/burning_ship fractals/julia \
+				  fractals/mandelbrot \
+
+FRACT_SRC	= $(addprefix $(SRC_DIR_F), $(addsuffix .c, $(SRC_FUNCTIONS_F)))
+FRACT_OBJ	= $(addprefix $(OBJ_DIR_F), $(addsuffix .o, $(SRC_FUNCTIONS_F)))
+
+IFMAKE_DIR_F = .cache_exists
+
+#instructions
+all: $(MLX) $(LIBFT) $(NAME)
+
+$(IFMAKE_DIR_F):
+	@mkdir -p $(OBJ_DIR_F)
+	@mkdir -p $(OBJ_DIR_F)fractals/
+
+$(MLX_DIR):
+	@echo "$(CYAN)Cloning MinilibX from GitHub...$(DEF_COLOR)"
+	@git clone https://github.com/42Paris/minilibx-linux.git $(MLX_DIR)
+
+$(MLX): $(MLX_DIR)
+	@echo "$(CYAN)Getting MinilibX ready$(DEF_COLOR)"
+	@make -sC $(MLX_DIR)
+
+$(LIBFT):
+	@echo "$(CYAN)Getting libft ready$(DEF_COLOR)"
+	@make -sC $(LIBFT_DIR)
+
+$(OBJ_DIR_F)%.o: $(SRC_DIR_F)%.c | $(IFMAKE_DIR_F)
+	@echo "$(ORANGE)Loading... $< $(DEF_COLOR)"
+	@$(CC) $(FLAGS) $(INCLUDE) -c $< -o $@
+
+$(OBJ_DIR_F)fractals/%.o: $(SRC_DIR_F)fractals/%.c | $(IFMAKE_DIR_F)
+	@echo "$(ORANGE)Loading... $< $(DEF_COLOR)"
+	@$(CC) $(FLAGS) $(INCLUDE) -c $< -o $@
+
+$(NAME): $(FRACT_OBJ)
+	@echo "$(GREEN)Compiling fractol...$(DEF_COLOR)"
+	@$(CC) $(FLAGS) -o $(NAME) $(FRACT_OBJ) $(MLX) $(LIBFT) $(INCLUDE) -lXext -lX11 -lm
+	@echo "$(GREEN)Fractol ready.$(DEF_COLOR)"
+
+bonus: all
 
 clean:
-	${RM} ${OBJS}
+	@echo "$(YELLOW)Removing object files$(DEF_COLOR)"
+	@rm -rf $(OBJ_DIR_F)
+	@if [ -d "$(MLX_DIR)" ]; then make clean -C $(MLX_DIR); fi
+	@make clean -C $(LIBFT_DIR)
 
 fclean: clean
-	${RM} ${NAME}
+	@echo "$(RED)Removing fractol...$(DEF_COLOR)"
+	@rm -f $(NAME)
+	@rm -f $(LIBFT_DIR)$(LIBFT_NAME)
+	@rm -rf $(MLX_DIR)
 
 re: fclean all
+	@echo "$(BLUE)Cleaned and rebuilt everything for fractol$(DEF_COLOR)"
 
 norm:
-	norminette $(SRCS)
-	norminette $(INCLUDES)
+	@norminette $(SRC_DIR_F) $(NORM) $(LIBFT_DIR) | grep -v Norme -B1 || true
+	@echo "Norminet the cat says : $(RED)M$(ORANGE)e$(YELLOW)o$(GREEN)w$(CYAN) !$(BLUE)!$(MAGENTA)!$(DEF_COLOR)"
 
-.PHONY: all clean fclean re
+.PHONY: all re clean fclean norm bonus

@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_isprint.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/07/04 13:58:04 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:19:36 by haile         ########   odam.nl         */
+/*   Created: 2024/11/06 10:42:33 by haile         #+#    #+#                 */
+/*   Updated: 2024/11/06 13:13:30 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+int	ft_isprint(int c)
 {
-	t_fractol	fractol;
-
-	if (parsing_arg(&fractol, ac, av))
-	{
-		print_controls();
-		window_init(&fractol);
-		render(&fractol);
-		event_management(&fractol);
-		mlx_loop(fractol.utils.ptr);
-	}
-	else
-		show_options();
+	if (c >= 32 && c <= 126)
+		return (1);
 	return (0);
 }

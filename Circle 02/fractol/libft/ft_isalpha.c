@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_isalpha.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/07/04 13:58:04 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:19:36 by haile         ########   odam.nl         */
+/*   Created: 2024/11/06 09:59:29 by haile         #+#    #+#                 */
+/*   Updated: 2024/11/06 10:03:34 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+int	ft_isalpha(int c)
 {
-	t_fractol	fractol;
-
-	if (parsing_arg(&fractol, ac, av))
-	{
-		print_controls();
-		window_init(&fractol);
-		render(&fractol);
-		event_management(&fractol);
-		mlx_loop(fractol.utils.ptr);
-	}
-	else
-		show_options();
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
 	return (0);
 }

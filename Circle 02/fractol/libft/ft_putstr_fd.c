@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_putstr_fd.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/07/04 13:58:04 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:19:36 by haile         ########   odam.nl         */
+/*   Created: 2024/11/06 10:44:52 by haile         #+#    #+#                 */
+/*   Updated: 2024/11/06 13:10:37 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	ft_putstr_fd(char *s, int fd)
 {
-	t_fractol	fractol;
+	int	i;
 
-	if (parsing_arg(&fractol, ac, av))
+	i = 0;
+	if (!s)
+		return ;
+	if (fd < 0)
+		return ;
+	while (s[i])
 	{
-		print_controls();
-		window_init(&fractol);
-		render(&fractol);
-		event_management(&fractol);
-		mlx_loop(fractol.utils.ptr);
+		write(fd, &s[i], 1);
+		i++;
 	}
-	else
-		show_options();
-	return (0);
 }

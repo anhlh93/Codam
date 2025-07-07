@@ -1,30 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_strrchr.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/07/04 13:58:04 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:19:36 by haile         ########   odam.nl         */
+/*   Created: 2024/11/06 10:46:24 by haile         #+#    #+#                 */
+/*   Updated: 2024/11/06 13:12:53 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+char	*ft_strrchr(const char *s, int c)
 {
-	t_fractol	fractol;
+	int	l;
 
-	if (parsing_arg(&fractol, ac, av))
+	l = 0;
+	while (s[l])
+		l++;
+	while (l >= 0)
 	{
-		print_controls();
-		window_init(&fractol);
-		render(&fractol);
-		event_management(&fractol);
-		mlx_loop(fractol.utils.ptr);
+		if (s[l] == (char)c)
+			return ((char *)(s + l));
+		l--;
 	}
-	else
-		show_options();
+	return (NULL);
+}
+/*
+#include <string.h>
+int	main(void)
+{
+	const char	str[] = "http://www.tutorialspoint.com";
+	const char	ch = 'w';
+	char	*ret;
+
+	ret = ft_strrchr(str, ch);
+	printf("String after |%c| is - |%s|\n", ch, ret);
 	return (0);
 }
+*/

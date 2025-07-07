@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   y_to_o_colors copy.h                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/07/04 13:58:04 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:19:36 by haile         ########   odam.nl         */
+/*   Created: 2025/07/04 13:58:17 by haile         #+#    #+#                 */
+/*   Updated: 2025/07/07 12:18:00 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#ifndef RAINBOW_COLORS_H
+# define RAINBOW_COLORS_H
 
-int	main(int ac, char **av)
-{
-	t_fractol	fractol;
+# define RC0 0xfbf8cc
+# define RC1 0xfde4cf
+# define RC2 0xffcfd2
+# define RC3 0xf1c0e8
+# define RC4 0xcfbaf0
 
-	if (parsing_arg(&fractol, ac, av))
-	{
-		print_controls();
-		window_init(&fractol);
-		render(&fractol);
-		event_management(&fractol);
-		mlx_loop(fractol.utils.ptr);
-	}
-	else
-		show_options();
-	return (0);
-}
+# define RC5 0xa3c4f3
+# define RC6 0x90dbf4
+# define RC7 0x8eecf5
+# define RC8 0x98f5e1
+# define RC9 0xb9fbc0
+
+#endif

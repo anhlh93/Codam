@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_putnbr_fd.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/07/04 13:58:04 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:19:36 by haile         ########   odam.nl         */
+/*   Created: 2024/11/06 10:44:46 by haile         #+#    #+#                 */
+/*   Updated: 2024/11/06 13:10:35 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	ft_putnbr_fd(int n, int fd)
 {
-	t_fractol	fractol;
+	char	nb;
 
-	if (parsing_arg(&fractol, ac, av))
+	if (fd < 0)
+		return ;
+	if (n == -2147483648)
 	{
-		print_controls();
-		window_init(&fractol);
-		render(&fractol);
-		event_management(&fractol);
-		mlx_loop(fractol.utils.ptr);
+		write(fd, "-2", 2);
+		n = 147483648;
 	}
-	else
-		show_options();
-	return (0);
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		n *= (-1);
+	}
+	if (n > 9)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		n = n % 10;
+	}
+	nb = n + '0';
+	write(fd, &nb, 1);
 }

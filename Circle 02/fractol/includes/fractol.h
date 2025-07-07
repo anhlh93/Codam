@@ -6,106 +6,124 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/04 13:58:17 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/04 15:17:26 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/07 12:20:18 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include "../minilibx-linux/mlx.h"
+/* *** includes *** */
+
+# include "mlx.h"
+# include "mlx_int.h"
+# include "libft.h"
+
+# include "messages.h"
+# include "struct.h"
+
+# include <complex.h>
+# include <math.h>
 # include <X11/X.h>
-# include <limits.h>
-# include <stdbool.h>
-# include <stdint.h>
-# include <stdlib.h>
-# include <unistd.h>
 
-# define KEY_ESC 65307
-# define KEY_LEFT_ARROW 65361
-# define KEY_UP_ARROW 65362
-# define KEY_RIGHT_ARROW 65363
-# define KEY_DOWN_ARROW 65364
-# define MOVE_RATIO 0.01
+# include "purple_colors.h"
+# include "rainbow_colors.h"
+# include "y_to_o_colors.h"
 
-# define WIDTH 1000
-# define HEIGHT 1000
-# define MAX_ITER 500
+/* *** define *** */
 
-# define SCROLL_UP 5
-# define SCROLL_DOWN 4
-# define MOUSE_LEFT_BUTTON 1
-# define MOUSE_RIGHT_BUTTON 3
+# define WIDTH 1920
+# define HEIGHT 1080
 
-# define CANVAS_TITLE "Max's Fractol"
-# define INVALID_ARG_MSG "Please select fractal type\n \
-0: mandelbrot, 1: julia, 2: burning ship\n"
+# define ZOOM_IN 0.75
+# define ZOOM_OUT 1.5
 
-typedef struct s_img
-{
-	void			*img;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
-	int				width;
-	int				height;
-}					t_img;
+# define MOUSE_ZOOM 0.5
+# define MOUSE_W_UP 4
+# define MOUSE_W_DOWN 5
 
-typedef struct s_complex_num
-{
-	double			re;
-	double			im;
-}					t_complex_num;
+# define MOVE_DISTANCE 0.2
+# define MOVE_UP 1
+# define MOVE_DOWN 2
+# define MOVE_LEFT 3
+# define MOVE_RIGHT 4
 
-typedef struct s_complex_info
-{
-	t_complex_num	z;
-	t_complex_num	c;
-	t_complex_num	delta;
-	t_complex_num	max;
-	t_complex_num	min;
-}					t_complex_info;
+# define MANDELBROT 1
+# define JULIA 2
+# define BURNING 3
 
-typedef struct s_canvas
-{
-	void			*mlx;
-	void			*win;
-	int				max_iter;
-	bool			is_pressed_mouse_left;
-	char			fractal_type;
-	t_img			img;
-	t_complex_info	comp_info;
-}					t_canvas;
+# define LIMIT 214748
 
-typedef uint32_t	(*t_get_color_func)(t_canvas *);
+/* *** SRC *** */
+/* *** *** *** *** src/fractals *** *** *** *** */
 
-// draw.c
-void				draw_mandelbrot(t_canvas *canvas);
-void				draw_julia(t_canvas *canvas);
-void				draw_burning_ship(t_canvas *canvas);
+int		burning_ship(t_fractol *f, double complex_real, double complex_imag);
 
-// color.c
-uint32_t			convert_rgb_hex(int r, int g, int b);
-uint32_t			simple_colorizer(int iter, t_canvas *canvas);
+double	random_double_real(void);
+double	random_double_imag(void);
+void	julia_random_values(t_fractol *f);
+int		julia(t_fractol *f, double z_real, double z_imag);
 
-// ultis.c
-void				ft_putstr_fd(char *str, int fd);
-double				abs_double(double val);
-double				squared(double num);
+int		mandelbrot(t_fractol *f, double complex_real, double complex_imag);
 
-// key_hooks.c
-int					exit_canvas(int exit_code);
-int					key_press_hook(int keycode, t_canvas *canvas);
-int					key_release_hook(int keycode, t_canvas *canvas);
+/* *** *** *** *** ---- *** ---- *** *** *** *** */
 
-// mouse_hooks.c
-int					mouse_press_hook(int button, int x, int y,
-						t_canvas *canvas);
-int					mouse_release_hook(int button, int x, int y,
-						t_canvas *canvas);
+/* *** close_program.c *** */
 
-// canvas.c
-void				init_canvas(t_canvas *canvas);
+int		close_program(t_fractol *f);
+
+/* *** colors.c *** */
+
+void	white_to_purple_light(int *colorama);
+void	white_to_purple_dark(int *colorama);
+void	yellow_to_orange(int *colorama);
+void	rainbow(int *colorama);
+int		*init_colorama(t_fractol *f, int selection);
+
+/* *** events.c *** */
+
+void	print_controls(void);
+int		keyboard_input_management(int keysym, t_fractol *f);
+void	event_management(t_fractol *f);
+
+/* *** extra_keyboard_actions.c *** */
+
+void	change_fractal(t_fractol *f);
+void	change_color(t_fractol *f);
+void	change_julia_set(t_fractol *f);
+
+/* *** full_default_init.c *** */
+
+void	julia_init(t_fractol *f, int starting_pos);
+void	init_shape(t_fractol *f);
+void	struct_init(t_fractol *f);
+void	window_init(t_fractol *f);
+
+/* *** movements_in_window.c *** */
+
+void	zoom(t_fractol *f, double zoom);
+void	move(t_fractol *f, double move, int direction);
+int		mouse_event_management(int button, int x, int y, t_fractol *f);
+int		keyboard_movements(int keysym, t_fractol *f);
+
+/* *** parsing.c *** */
+
+int		ok_f(t_fractol *f, char *av);
+int		ok_j(t_fractol *f, char *av1, char *av2);
+int		parsing_arg(t_fractol *f, int ac, char **av);
+void	show_options(void);
+
+/* *** render.c *** */
+
+void	pix_put(t_ima *img, int x, int y, int color);
+int		pix_calculate(t_fractol *f, double real, double imag);
+void	render(t_fractol *f);
+
+/* *** utils_init.c *** */
+
+void	init_pos(t_fractol *f);
+void	init_zoom(t_fractol *f);
+void	init_mlx_utils(t_fractol *f);
+void	img_struct_init(t_fractol *f);
 
 #endif
