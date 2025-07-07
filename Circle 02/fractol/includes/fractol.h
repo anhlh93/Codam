@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/04 13:58:17 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:20:18 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/07 12:30:00 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,7 @@ void	init_pos(t_fractol *f);
 void	init_zoom(t_fractol *f);
 void	init_mlx_utils(t_fractol *f);
 void	img_struct_init(t_fractol *f);
+int		abs_value(int nb);
+
 
 #endif

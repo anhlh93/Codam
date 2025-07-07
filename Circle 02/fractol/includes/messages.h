@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/04 13:58:17 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:11:13 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/07 12:36:51 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define P_EX_LIST "\nOptions:\n\n- mandelbrot\n- julia\n- burning ship\n"
 # define JULIA_OPTIONS "\nFor Julia, you can add a number between 1 and 4.\n"
 # define JULIA_EXAMPLE "\nExample : ./fractol julia 3\n"
-# define ENJOY "\nEnjoy exploration!\n\n"
 
 /* *** print_controls *** */
 

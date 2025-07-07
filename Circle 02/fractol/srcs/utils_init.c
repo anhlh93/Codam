@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/04 13:58:10 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 11:53:03 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/07 12:29:39 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,12 @@ void	img_struct_init(t_fractol *f)
 	f->img.bpp = 0;
 	f->img.line_len = 0;
 	f->img.endian = 0;
+}
+
+int	abs_value(int nb)
+{
+	if (nb < 0)
+		return (-nb);
+	else
+		return (nb);
 }

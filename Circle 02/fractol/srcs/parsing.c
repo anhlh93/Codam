@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/04 13:58:13 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:02:27 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/07 12:36:45 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int	ok_f(t_fractol *f, char *av)
 {
-	if (ft_strcmp(av, "mandelbrot") == 0)
+	if (ft_strncmp(av, "mandelbrot", 15) == 0)
 	{
 		f->julia_options = 1;
 		f->fractal = MANDELBROT;
 		return (1);
 	}
-	else if (ft_strcmp(av, "julia") == 0)
+	else if (ft_strncmp(av, "julia", 15) == 0)
 	{
 		f->fractal = JULIA;
 		f->julia_options = 1;
 		return (1);
 	}
-	else if (ft_strcmp(av, "burning ship") == 0)
+	else if (ft_strncmp(av, "burning ship", 15) == 0)
 	{
 		f->julia_options = 1;
 		f->fractal = BURNING;
@@ -37,7 +37,7 @@ int	ok_f(t_fractol *f, char *av)
 
 int	ok_j(t_fractol *f, char *av1, char *av2)
 {
-	if (strcmp(av1, "julia") == 0 && (ft_atoi(av2) >= 1 && ft_atoi(av2) <= 4))
+	if (ft_strncmp(av1, "julia", 15) == 0 && (ft_atoi(av2) >= 1 && ft_atoi(av2) <= 4))
 	{
 		f->fractal = JULIA;
 		if (ft_atoi(av2) == 1)
@@ -69,5 +69,4 @@ void	show_options(void)
 	ft_putstr_fd(P_EX_LIST, 1);
 	ft_putstr_fd(JULIA_OPTIONS, 1);
 	ft_putstr_fd(JULIA_EXAMPLE, 1);
-	ft_putstr_fd(ENJOY, 1);
 }

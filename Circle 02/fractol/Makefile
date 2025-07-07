@@ -34,12 +34,12 @@ NORM		= ./includes\
 			  ./libft/src_lib
 
 INCLUDE		= -I ./includes/\
-			  -I ./libft/include/\
+			  -I ./libft\
 			  -I ./$(MLX_DIR)
 
 #Sources
 OBJ_DIR_F	= obj/
-SRC_DIR_F	= src/
+SRC_DIR_F	= srcs/
 
 SRC_FUNCTIONS_F = close_program colors events extra_keyboard_actions \
 				  full_default_init main movements_in_window parsing \
