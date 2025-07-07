@@ -1,0 +1,22 @@
+/main.c
+// create_stack: DONE
+/// add_arg: DONE
+// sort: DOING
+// free_tack: DONE
+// new_stack: DONE
+// add_arg: DONE
+/// exit_error: DONE
+
+/sort.c
+//sort_5: DONED
+///check_sorted: DONE
+///stack_index: DONE (in ultis.c) - NOT LINKED
+///sa: DONE
+//sort_3: DONED
+///ra: DONED
+///rra: DONED
+//created_index: DONED
+///pa: DONE
+//big_sort: DONED
+
+/ultis.c
