@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/04 14:50:36 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 11:56:02 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/07 15:03:04 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,23 @@ void	zoom(t_fractol *f, double zoom)
 {
 	f->zoom.new_real = f->shape.min_real - f->shape.max_real;
 	f->zoom.new_imag = f->shape.max_imag - f->shape.min_imag;
-	f->shape.max_real = f->shape.max_real
-		+ (f->zoom.new_real - zoom * f->zoom.new_real) / 2;
+	f->shape.max_real = f->shape.max_real + (f->zoom.new_real - zoom
+			* f->zoom.new_real) / 2;
 	f->shape.min_real = f->shape.max_real + zoom * f->zoom.new_real;
-	f->shape.min_imag = f->shape.min_imag
-		+ (f->zoom.new_imag - zoom * f->zoom.new_imag) / 2;
+	f->shape.min_imag = f->shape.min_imag + (f->zoom.new_imag - zoom
+			* f->zoom.new_imag) / 2;
 	f->shape.max_imag = f->shape.min_imag + zoom * f->zoom.new_imag;
 }
 
 void	move(t_fractol *f, double move, int direction)
 {
-	f->zoom.new_real = f->shape.min_real - f->shape.max_real;
 	f->zoom.new_imag = f->shape.max_imag - f->shape.min_imag;
+	f->zoom.new_real = f->shape.min_real - f->shape.max_real;
 	if (direction == MOVE_UP)
 	{
 		f->shape.min_imag += f->zoom.new_imag * move;
 		f->shape.max_imag += f->zoom.new_imag * move;
 	}
-	else if (direction == MOVE_DOWN)
-	{
-		f->shape.min_imag -= f->zoom.new_imag * move;
-		f->shape.max_imag -= f->zoom.new_imag * move;
-	}	
 	else if (direction == MOVE_LEFT)
 	{
 		f->shape.min_real += f->zoom.new_real * move;
@@ -45,8 +40,13 @@ void	move(t_fractol *f, double move, int direction)
 	}
 	else if (direction == MOVE_RIGHT)
 	{
-		f->shape.min_real -= f->zoom.new_real * move;
 		f->shape.max_real -= f->zoom.new_real * move;
+		f->shape.min_real -= f->zoom.new_real * move;
+	}
+	else if (direction == MOVE_DOWN)
+	{
+		f->shape.max_imag -= f->zoom.new_imag * move;
+		f->shape.min_imag -= f->zoom.new_imag * move;
 	}
 }
 
@@ -78,16 +78,16 @@ int	mouse_event_management(int button, int x, int y, t_fractol *f)
 	return (0);
 }
 
-int	keyboard_movements(int keysym, t_fractol *f)
+int	keyboard_movements(int key, t_fractol *f)
 {
-	if (keysym == XK_Up || keysym == XK_w)
+	if (key == XK_Up || key == XK_w)
 		move(f, MOVE_DISTANCE, MOVE_UP);
-	else if (keysym == XK_Down || keysym == XK_s)
-		move(f, MOVE_DISTANCE, MOVE_DOWN);
-	else if (keysym == XK_Left || keysym == XK_a)
-		move(f, MOVE_DISTANCE, MOVE_LEFT);
-	else if (keysym == XK_Right || keysym == XK_d)
+	else if (key == XK_Right || key == XK_d)
 		move(f, MOVE_DISTANCE, MOVE_RIGHT);
+	else if (key == XK_Left || key == XK_a)
+		move(f, MOVE_DISTANCE, MOVE_LEFT);
+	else if (key == XK_Down || key == XK_s)
+		move(f, MOVE_DISTANCE, MOVE_DOWN);
 	render(f);
 	return (0);
 }

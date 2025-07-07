@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   y_to_o_colors copy.h                               :+:    :+:            */
+/*   rainbow_colors.h                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/04 13:58:17 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:18:00 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/07 14:07:01 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@
 # define RC6 0x90dbf4
 # define RC7 0x8eecf5
 # define RC8 0x98f5e1
-# define RC9 0xb9fbc0
+# define RC9 0x98f5e1
 
 #endif

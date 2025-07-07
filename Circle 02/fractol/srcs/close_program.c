@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/04 13:58:04 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 11:59:18 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/07 15:00:03 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	close_program(t_fractol *f)
 		mlx_destroy_display(f->utils.ptr);
 	if (f->utils.ptr)
 		free(f->utils.ptr);
-	if (f->colorama)
-		free(f->colorama);
+	if (f->color)
+		free(f->color);
 	exit(0);
 }

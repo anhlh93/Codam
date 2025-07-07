@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   close_program copy 3.c                             :+:    :+:            */
+/*   julia.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/04 13:58:04 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:04:15 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/07 14:16:52 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,17 @@ void	julia_random_values(t_fractol *f)
 
 int	julia(t_fractol *f, double z_real, double z_imag)
 {
-	int		result;
+	int		res;
 	double	tmp;
 
-	result = 0;
-	while (result < f->max_iter)
+	res = -1;
+	while (++res < f->max_iter)
 	{
 		if ((z_real * z_real + z_imag * z_imag) > 4.0)
 			break ;
 		tmp = 2 * z_real * z_imag + f->shape.julia.ci;
 		z_real = z_real * z_real - z_imag * z_imag + f->shape.julia.cr;
 		z_imag = tmp;
-		result++;
 	}
-	return (result);
+	return (res);
 }
-

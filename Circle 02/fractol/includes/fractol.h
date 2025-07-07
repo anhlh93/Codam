@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/04 13:58:17 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:30:00 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/07 15:00:03 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,17 @@
 
 /* *** includes *** */
 
+# include "libft.h"
+# include "messages.h"
 # include "mlx.h"
 # include "mlx_int.h"
-# include "libft.h"
-
-# include "messages.h"
-# include "struct.h"
-
-# include <complex.h>
-# include <math.h>
-# include <X11/X.h>
-
 # include "purple_colors.h"
 # include "rainbow_colors.h"
+# include "struct.h"
 # include "y_to_o_colors.h"
+# include <X11/X.h>
+# include <complex.h>
+# include <math.h>
 
 /* *** define *** */
 
@@ -74,15 +71,15 @@ int		close_program(t_fractol *f);
 
 /* *** colors.c *** */
 
-void	white_to_purple_light(int *colorama);
-void	white_to_purple_dark(int *colorama);
-void	yellow_to_orange(int *colorama);
-void	rainbow(int *colorama);
-int		*init_colorama(t_fractol *f, int selection);
+void	white_to_purple_light(int *color);
+void	white_to_purple_dark(int *color);
+void	yellow_to_orange(int *color);
+void	rainbow(int *color);
+int		*init_color(t_fractol *f, int selection);
 
 /* *** events.c *** */
 
-void	print_controls(void);
+void	print_guide(void);
 int		keyboard_input_management(int keysym, t_fractol *f);
 void	event_management(t_fractol *f);
 
@@ -108,10 +105,10 @@ int		keyboard_movements(int keysym, t_fractol *f);
 
 /* *** parsing.c *** */
 
-int		ok_f(t_fractol *f, char *av);
-int		ok_j(t_fractol *f, char *av1, char *av2);
+int		check_2(t_fractol *f, char *av);
+int		check_3(t_fractol *f, char *av1, char *av2);
 int		parsing_arg(t_fractol *f, int ac, char **av);
-void	show_options(void);
+void	show_messages(void);
 
 /* *** render.c *** */
 
@@ -126,6 +123,5 @@ void	init_zoom(t_fractol *f);
 void	init_mlx_utils(t_fractol *f);
 void	img_struct_init(t_fractol *f);
 int		abs_value(int nb);
-
 
 #endif

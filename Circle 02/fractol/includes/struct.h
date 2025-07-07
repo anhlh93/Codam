@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/04 13:58:17 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 12:19:02 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/07 15:00:03 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 * Field: int julia_options
 * Holds initialization options for Julia sets.
 *
-* Field: int* colorama
+* Field: int* color
 * Holds a table of hardcoded colors.
 *
 * Field: int color_index
@@ -117,7 +117,7 @@ typedef struct s_fractol
 	t_shape	shape;
 	t_zoom	zoom;
 	int		julia_options;
-	int		*colorama;
+	int		*color;
 	int		color_index;
 	int		max_iter;
 	int		fractal;

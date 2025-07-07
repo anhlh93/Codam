@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   canvas.c                                           :+:    :+:            */
+/*   extra_keyboard_actions.c                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/04 15:00:29 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 11:57:10 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/07 15:00:03 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	change_fractal(t_fractol *f)
 void	change_color(t_fractol *f)
 {
 	f->color_index++;
-	free(f->colorama);
-	f->colorama = init_colorama(f, f->color_index);
-	if (!f->colorama)
+	free(f->color);
+	f->color = init_color(f, f->color_index);
+	if (!f->color)
 		close_program(f);
 	if (f->color_index > 3)
 		f->color_index = 0;
