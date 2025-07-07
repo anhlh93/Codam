@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 void	exit_error(t_stack *a, t_stack *b)
 {

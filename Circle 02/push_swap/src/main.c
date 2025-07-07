@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 static t_stack	*new_stack(void)
 {
@@ -7,8 +7,8 @@ static t_stack	*new_stack(void)
 	temp = malloc(sizeof(t_stack));
 	if (temp)
 	{
-		temp->data = NULL;
 		temp->size = 0;
+		temp->data = NULL;
 	}
 	else
 		exit_error(NULL, NULL);
@@ -34,7 +34,7 @@ static void create_stack(t_stack *a, t_stack *b, int ac, char **av)
 		val = add_arg(av[i]);
 		if (!val)
 			exit_error(a, b);
-		if is_dup(a, val->num)
+		if (is_dup(a, val->num))
 		{
 			free(val);
 			exit_error(a, b);

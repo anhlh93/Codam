@@ -1,4 +1,4 @@
-# include "push_swap.h"
+#include "../include/push_swap.h"
 
 static void	create_index(t_stack *s)
 {

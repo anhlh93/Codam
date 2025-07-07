@@ -1,19 +1,16 @@
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -Wunreachable-code
 NAME	= push_swap
 LIBFT	= include/libft
-PRINTF	= include/ft_printf
 HEADER	= include/
 
-# Include getnextline in LIBFT folder
-
-SRCS	= ./src/handle.c \
-			./src/main.c \
-			./src/operations/push.c \
-			./src/operations/reverse.c \
-			./src/operations/rotate.c \
-			./src/operations/swap.c \
+SRCS	= 	./src/main.c \
+			./src/stack_operation/push.c \
+			./src/stack_operation/reverse.c \
+			./src/stack_operation/rotate.c \
+			./src/stack_operation/swap.c \
 			./src/sort.c \
-			./src/utils/utils.c \
+			./src/utils.c \
+			./src/ultis2.c \
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -23,13 +20,12 @@ all: $(NAME)
 # To create the .o files, take the .c file and
 # use -c to compile or assemble the source file, then -o to output.
 %.o: %.c
-	$(CC) $(CFLAGS) -o $@ -c $< -I $(HEADER) -I $(LIBFT) -I $(PRINTF) -O3
+	$(CC) $(CFLAGS) -o $@ -c $< -I $(HEADER) -I $(LIBFT) -O3
 
 # Compile everything, first create the objects.
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT)
-	$(MAKE) -C $(PRINTF)
-	$(CC) -o $(NAME) $(CFLAGS) $(OBJS) $(LIBFT)/libft.a $(PRINTF)/libftprintf.a
+	$(CC) -o $(NAME) $(CFLAGS) $(OBJS) $(LIBFT)/libft.a
 
 # Clean object files
 clean:
@@ -38,7 +34,6 @@ clean:
 # Clean library file
 fclean: clean
 	$(MAKE) -C $(LIBFT) fclean
-	$(MAKE) -C $(PRINTF) fclean
 	rm -f $(NAME)
 
 # Re-compile

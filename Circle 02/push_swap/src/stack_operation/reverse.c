@@ -35,3 +35,21 @@ void	rrr(t_stack *a, t_stack *b)
 	reverse(b);
 	ft_putstr_fd("rrr", STDOUT_FILENO);
 }
+
+
+static void	get_last(t_stack *stack, t_list **slast, t_list **last)
+{
+	t_list	*iter;
+
+	iter = stack->data;
+	while (iter)
+	{
+		if (!iter->next->next)
+		{
+			(*slast) = iter;
+			(*last) = iter->next;
+			break ;
+		}
+		iter = iter->next;
+	}
+}
