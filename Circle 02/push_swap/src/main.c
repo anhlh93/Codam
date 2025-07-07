@@ -1,8 +1,5 @@
 #include "push_swap.h"
 
-// create_stack: DOING
-// sort: DOING
-
 static t_stack	*new_stack(void)
 {
 	t_stack	*temp;
@@ -14,19 +11,18 @@ static t_stack	*new_stack(void)
 		temp->size = 0;
 	}
 	else
-	{
-		free(temp);
 		exit_error(NULL, NULL);
-	}
 	return (temp);
 }
 void	free_stack(t_stack *stack)
 {
+	if (!stack)
+		return ;
 	ft_lstclear(&stack->data, &free);
 	free(stack);
 }
 
-static void create_stack(t_stack a, t_stack b, int ac, char **av)
+static void create_stack(t_stack *a, t_stack *b, int ac, char **av)
 {
 	long	i;
 	t_val	*val;
@@ -35,9 +31,20 @@ static void create_stack(t_stack a, t_stack b, int ac, char **av)
 	(void)b;
 	while (i < ac)
 	{
-		val = insert_arg(av[i + 1]);
+		val = add_arg(av[i]);
+		if (!val)
+			exit_error(a, b);
+		if is_dup(a, val->num)
+		{
+			free(val);
+			exit_error(a, b);
+		}
+		ft_lstadd_back(&a->data, ft_lstnew(val));
+		i++;
 	}
+	a->size = i - 1;
 }
+
 int	main(int ac, char **av)
 {
 	t_stack	*a;

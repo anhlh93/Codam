@@ -4,7 +4,9 @@ static void push(t_stack *to, t_stack *from)
 {
 	t*list temp;
 
-	temp = from->data->next
+	temp = from->data->next;
+	ft_lstadd_front(&to->data, from->data);
+	from->data = temp;
 }
 void	pa(t_stack *a, t_stack *b)
 {
