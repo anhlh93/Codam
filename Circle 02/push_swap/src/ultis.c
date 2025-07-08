@@ -41,13 +41,14 @@ t_val	*add_arg(char *c)
 	if (!temp)
 		return (NULL);
 	nbr = ft_atoi(c);
-	if (nbr >= INT_MIN && nbr <= INT_MAX)
+	if (nbr < INT_MIN || nbr > INT_MAX)
 	{
-		temp->num = nbr;
-		temp->radix_index = -1;
-		return (temp);
+		ft_putstr_fd("Error\n", STDOUT_FILENO);
+		return (NULL);
 	}
-	return (NULL);
+	temp->num = nbr;
+	temp->radix_index = -1;
+	return (temp);
 }
 
 bool	check_sorted(t_stack *stack)

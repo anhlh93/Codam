@@ -6,15 +6,15 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/06 10:04:55 by haile         #+#    #+#                 */
-/*   Updated: 2024/11/06 13:14:06 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/08 07:55:52 by haianhle      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int	result;
+	long	result;
 	int	sign;
 	int	i;
 

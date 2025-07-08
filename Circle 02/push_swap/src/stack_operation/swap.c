@@ -20,18 +20,18 @@ static void	swap(t_stack *stack)
 void	sa(t_stack *stackA)
 {
 	swap(stackA);
-	ft_putstr_fd("sa", STDOUT_FILENO);
+	ft_putstr_fd("sa\n", STDOUT_FILENO);
 }
 
 void	sb(t_stack *stackB)
 {
 	swap(stackB);
-	ft_putstr_fd("sb", STDOUT_FILENO);
+	ft_putstr_fd("sb\n", STDOUT_FILENO);
 }
 
 void	ss(t_stack *stackA, t_stack *stackB)
 {
 	swap(stackA);
 	swap(stackB);
-	ft_putstr_fd("ss", STDOUT_FILENO);
+	ft_putstr_fd("ss\n", STDOUT_FILENO);
 }

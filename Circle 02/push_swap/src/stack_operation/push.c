@@ -13,13 +13,13 @@ void	pa(t_stack *a, t_stack *b)
 	push(a, b);
 	b->size -= 1;
 	a->size += 1;
-	ft_putstr_fd("pa", STDOUT_FILENO);
+	ft_putstr_fd("pa\n", STDOUT_FILENO);
 }
 void	pb(t_stack *a, t_stack *b)
 {
 	push(b, a);
 	a->size -= 1;
 	b->size += 1;
-	ft_putstr_fd("pb", STDOUT_FILENO);
+	ft_putstr_fd("pb\n", STDOUT_FILENO);
 }
 
