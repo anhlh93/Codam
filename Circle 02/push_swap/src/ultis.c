@@ -4,7 +4,7 @@
 // add_arg: DOING
 /// check_parsing: DOING
 
-static bool	check_parsing(const char *str)
+bool	check_parsing(const char *str)
 {
 	int		minus_count;
 	size_t	i;
@@ -30,7 +30,7 @@ static bool	check_parsing(const char *str)
 	return (true);
 }
 
-t_val	add_arg(char *c)
+t_val	*add_arg(char *c)
 {
 	long	nbr;
 	t_val	*temp;

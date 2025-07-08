@@ -37,7 +37,7 @@ void	rrr(t_stack *a, t_stack *b)
 }
 
 
-static void	get_last(t_stack *stack, t_list **slast, t_list **last)
+void	get_last(t_stack *stack, t_list **slast, t_list **last)
 {
 	t_list	*iter;
 

@@ -6,7 +6,7 @@
 #    By: haile <haile@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/11/06 10:47:13 by haile         #+#    #+#                  #
-#    Updated: 2024/11/06 13:25:50 by haile         ########   odam.nl          #
+#    Updated: 2025/07/08 06:59:07 by haianhle      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
        ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c \
        ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
        ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
-       ft_putendl_fd.c ft_putnbr_fd.c ft_lstclear.c
+       ft_putendl_fd.c ft_putnbr_fd.c ft_lstclear.c \
+       ft_lstadd_back.c ft_lstadd_front.c ft_lstdelone.c \
+       ft_lstlast.c ft_lstnew.c\
 # Object files compile for first and second part
 OBJS = ${SRCS:.c=.o}
 # Sources files compile for bonus part

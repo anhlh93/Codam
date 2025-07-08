@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
-/** 
- * Shift up all elements of stack a by 1. 
+/**
+ * Shift up all elements of stack a by 1.
  * The first element becomes the last one.
  * @param stack The Stack.
  */
@@ -20,18 +20,18 @@ static void	rotate(t_stack *stack)
 void	ra(t_stack *a)
 {
 	rotate(a);
-	ft_putendl("ra");
+	ft_putstr_fd("ra", STDOUT_FILENO);
 }
 
 void	rb(t_stack *b)
 {
 	rotate(b);
-	ft_putendl("rb");
+	ft_putstr_fd("rb", STDOUT_FILENO);
 }
 
 void	rr(t_stack *a, t_stack *b)
 {
 	rotate(a);
 	rotate(b);
-	ft_putendl("rr");
+	ft_putstr_fd("rr", STDOUT_FILENO);
 }

@@ -32,7 +32,6 @@ void	sort(t_stack *a, t_stack *b);
 void	sort_3(t_stack *a);
 void	sort_5(t_stack *a, t_stack *b);
 void	radix_sort(t_stack *a, t_stack *b);
-void	create_index(t_stack *s);
 t_val	*stack_index(t_stack *stack, int index);
 void	ra(t_stack *stack);
 void	rb(t_stack *stack);
@@ -46,5 +45,6 @@ void	ss(t_stack *a, t_stack *b);
 void	pa(t_stack *a, t_stack *b);
 void	pb(t_stack *a, t_stack *b);
 void	print_stack(t_stack *stack);
+void	get_last(t_stack *stack, t_list **slast, t_list **last);
 
 #endif

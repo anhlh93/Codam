@@ -9,7 +9,7 @@ SRCS	= 	./src/main.c \
 			./src/stack_operation/rotate.c \
 			./src/stack_operation/swap.c \
 			./src/sort.c \
-			./src/utils.c \
+			./src/ultis.c \
 			./src/ultis2.c \
 
 OBJS	= ${SRCS:.c=.o}

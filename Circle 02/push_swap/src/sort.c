@@ -27,7 +27,7 @@ static void	create_index(t_stack *s)
 	}
 }
 
-void sort3(t_stack *a)
+void sort_3(t_stack *a)
 {
 	int	an;
 	int	bn;
@@ -84,7 +84,7 @@ static void	big_sort(t_stack *a, t_stack *b)
 	i = 0;
 	index = 0;
 	size = a->size;
-	while (!is_sorted(a))
+	while (!check_sorted(a))
 	{
 		i = -1;
 		while (++i < size)
@@ -110,11 +110,11 @@ void sort(t_stack *a, t_stack *b)
 			sa(a);
 	}
 	else if (a->size == 3)
-		sort3(a);
+		sort_3(a);
 	else if (a->size <= 5)
 	{
 		create_index(a);
-		sort5(a, b);
+		sort_5(a, b);
 	}
 	else
 	{
