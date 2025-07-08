@@ -1,4 +1,16 @@
-# include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   reverse.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: haile <haile@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/07/08 09:10:51 by haile         #+#    #+#                 */
+/*   Updated: 2025/07/08 09:10:55 by haile         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
 
 void	get_last(t_stack *stack, t_list **slast, t_list **last)
 {
@@ -8,7 +20,7 @@ void	get_last(t_stack *stack, t_list **slast, t_list **last)
 	{
 		*slast = NULL;
 		*last = NULL;
-		return;
+		return ;
 	}
 	iter = stack->data;
 	while (iter)
@@ -58,4 +70,3 @@ void	rrr(t_stack *a, t_stack *b)
 	reverse(b);
 	ft_putstr_fd("rrr\n", STDOUT_FILENO);
 }
-

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   sort.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: haile <haile@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/07/08 09:10:26 by haile         #+#    #+#                 */
+/*   Updated: 2025/07/08 09:11:52 by haile         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 
 static void	create_index(t_stack *s)
 {
-	int	i;
+	int		i;
 	t_list	*cpy;
 	t_val	*smallest;
 
@@ -27,7 +39,7 @@ static void	create_index(t_stack *s)
 	}
 }
 
-void sort_3(t_stack *a)
+void	sort_3(t_stack *a)
 {
 	int	an;
 	int	bn;
@@ -75,6 +87,7 @@ void	sort_5(t_stack *a, t_stack *b)
 			pa(a, b);
 	}
 }
+
 static void	big_sort(t_stack *a, t_stack *b)
 {
 	int	i;
@@ -100,7 +113,7 @@ static void	big_sort(t_stack *a, t_stack *b)
 	}
 }
 
-void sort(t_stack *a, t_stack *b)
+void	sort(t_stack *a, t_stack *b)
 {
 	if (check_sorted(a))
 		return ;

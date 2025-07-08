@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/06 10:04:55 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/08 07:55:52 by haianhle      ########   odam.nl         */
+/*   Updated: 2025/07/08 09:28:18 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 long	ft_atoi(const char *str)
 {
 	long	result;
-	int	sign;
-	int	i;
+	int		sign;
+	int		i;
 
 	result = 0;
 	i = 0;
