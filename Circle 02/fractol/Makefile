@@ -25,7 +25,7 @@ LIBFT		= $(LIBFT_DIR)$(LIBFT_NAME)
 #Variables
 NAME		= fractol
 CC			= cc
-FLAGS		= -Wall -Werror -Wextra
+FLAGS		= -Wall -Werror -Wextra -Ofast -g3
 RM			= rm -f
 AR			= ar rcs
 
@@ -64,11 +64,11 @@ $(MLX_DIR):
 
 $(MLX): $(MLX_DIR)
 	@echo "$(CYAN)Getting MinilibX ready$(DEF_COLOR)"
-	@make -sC $(MLX_DIR)
+	@make -C $(MLX_DIR)
 
 $(LIBFT):
 	@echo "$(CYAN)Getting libft ready$(DEF_COLOR)"
-	@make -sC $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 
 $(OBJ_DIR_F)%.o: $(SRC_DIR_F)%.c | $(IFMAKE_DIR_F)
 	@echo "$(ORANGE)Loading... $< $(DEF_COLOR)"
