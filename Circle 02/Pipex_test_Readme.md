@@ -166,19 +166,4 @@ else
     cat outfile1
 fi
 
-# Continue with other tests...
-```
 
-## Tips for Testing
-
-1. **Methodical Approach**: Start with simple test cases and gradually move to more complex ones.
-
-2. **Compare with Shell**: Always compare your program's output with the equivalent shell command.
-
-3. **Error Codes**: Check that your program returns the appropriate exit codes, especially for error conditions.
-
-4. **Memory Tools**: Use tools like Valgrind and AddressSanitizer to check for memory issues.
-
-5. **Edge Cases**: Pay special attention to edge cases like empty files, large outputs, and special characters.
-
-Would you like me to elaborate on any specific test case or provide additional tests for any particular aspect of the project?
