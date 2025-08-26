@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ultis2.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: haile <haile@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/07/08 09:10:32 by haile         #+#    #+#                 */
+/*   Updated: 2025/07/08 09:11:40 by haile         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 
 void	exit_error(t_stack *a, t_stack *b)
@@ -9,13 +21,14 @@ void	exit_error(t_stack *a, t_stack *b)
 	ft_putstr_fd("Error\n", STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }
+
 bool	is_dup(t_stack *stack, int n)
 {
 	t_list	*iter;
 
 	if (!stack)
 		return (false);
-	iter = stack -> data;
+	iter = stack->data;
 	while (iter)
 	{
 		if (n == ((t_val *)iter->content)->num)

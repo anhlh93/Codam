@@ -1,54 +1,49 @@
 #Colors / base 16 / Bright
-DEF_COLOR	= \033[0;39m
-GRAY		= \033[0;90m
-RED			= \033[0;91m
-GREEN		= \033[0;92m
-YELLOW		= \033[0;93m
-BLUE		= \033[0;94m
-MAGENTA		= \033[0;95m
-CYAN		= \033[0;96m
-WHITE		= \033[0;97m
-
+DEF_COLOR = \033[0;39m
+GRAY = \033[0;90m
+RED = \033[0;91m
+GREEN = \033[0;92m
+YELLOW = \033[0;93m
+BLUE = \033[0;94m
+MAGENTA = \033[0;95m
+CYAN = \033[0;96m
+WHITE = \033[0;97m
 #Colors / Perso / Bright
-ORANGE		= \033[38;5;214m
+ORANGE = \033[38;5;214m
 
 #MinilibX
-MLX_DIR		= minilibx-linux/
-MLX_NAME	= libmlx.a
-MLX			= $(MLX_DIR)$(MLX_NAME)
+MLX_DIR = minilibx-linux/
+MLX_NAME = libmlx.a
+MLX = $(MLX_DIR)$(MLX_NAME)
 
 #Libft
-LIBFT_DIR	= libft/
-LIBFT_NAME	= libft.a
-LIBFT		= $(LIBFT_DIR)$(LIBFT_NAME)
+LIBFT_DIR = libft/
+LIBFT_NAME = libft.a
+LIBFT = $(LIBFT_DIR)$(LIBFT_NAME)
 
 #Variables
-NAME		= fractol
-CC			= cc
-FLAGS		= -Wall -Werror -Wextra -Ofast -g3
-RM			= rm -f
-AR			= ar rcs
-
-NORM		= ./includes\
-			  ./libft/include/\
-			  ./libft/src_lib
-
-INCLUDE		= -I ./includes/\
-			  -I ./libft\
-			  -I ./$(MLX_DIR)
+NAME = fractol
+CC = cc
+FLAGS = -Wall -Werror -Wextra -Ofast -g3
+RM = rm -f
+AR = ar rcs
+NORM = ./includes\
+	./libft/include/\
+	./libft/src_lib
+INCLUDE = -I ./includes/\
+	-I ./libft\
+	-I ./$(MLX_DIR)
 
 #Sources
-OBJ_DIR_F	= obj/
-SRC_DIR_F	= srcs/
-
+OBJ_DIR_F = obj/
+SRC_DIR_F = srcs/
 SRC_FUNCTIONS_F = close_program colors events extra_keyboard_actions \
-				  full_default_init main movements_in_window parsing \
-				  render utils_init fractals/burning_ship fractals/julia \
-				  fractals/mandelbrot \
+	full_default_init main movements_in_window parsing \
+	render utils_init fractals/burning_ship fractals/julia \
+	fractals/mandelbrot \
 
-FRACT_SRC	= $(addprefix $(SRC_DIR_F), $(addsuffix .c, $(SRC_FUNCTIONS_F)))
-FRACT_OBJ	= $(addprefix $(OBJ_DIR_F), $(addsuffix .o, $(SRC_FUNCTIONS_F)))
-
+FRACT_SRC = $(addprefix $(SRC_DIR_F), $(addsuffix .c, $(SRC_FUNCTIONS_F)))
+FRACT_OBJ = $(addprefix $(OBJ_DIR_F), $(addsuffix .o, $(SRC_FUNCTIONS_F)))
 IFMAKE_DIR_F = .cache_exists
 
 #instructions
@@ -58,12 +53,8 @@ $(IFMAKE_DIR_F):
 	@mkdir -p $(OBJ_DIR_F)
 	@mkdir -p $(OBJ_DIR_F)fractals/
 
-$(MLX_DIR):
-	@echo "$(CYAN)Cloning MinilibX from GitHub...$(DEF_COLOR)"
-	@git clone https://github.com/42Paris/minilibx-linux.git $(MLX_DIR)
-
-$(MLX): $(MLX_DIR)
-	@echo "$(CYAN)Getting MinilibX ready$(DEF_COLOR)"
+$(MLX):
+	@echo "$(CYAN)Compiling MinilibX...$(DEF_COLOR)"
 	@make -C $(MLX_DIR)
 
 $(LIBFT):
@@ -95,7 +86,6 @@ fclean: clean
 	@echo "$(RED)Removing fractol...$(DEF_COLOR)"
 	@rm -f $(NAME)
 	@rm -f $(LIBFT_DIR)$(LIBFT_NAME)
-	@rm -rf $(MLX_DIR)
 
 re: fclean all
 	@echo "$(BLUE)Cleaned and rebuilt everything for fractol$(DEF_COLOR)"

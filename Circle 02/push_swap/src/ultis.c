@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ultis.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: haile <haile@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/07/08 09:10:29 by haile         #+#    #+#                 */
+/*   Updated: 2025/07/08 09:10:30 by haile         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 #include <limits.h>
 
@@ -43,7 +55,6 @@ t_val	*add_arg(char *c)
 	nbr = ft_atoi(c);
 	if (nbr < INT_MIN || nbr > INT_MAX)
 	{
-		ft_putstr_fd("Error\n", STDOUT_FILENO);
 		return (NULL);
 	}
 	temp->num = nbr;

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   swap.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: haile <haile@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/07/08 09:11:04 by haile         #+#    #+#                 */
+/*   Updated: 2025/07/08 09:11:08 by haile         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	swap(t_stack *stack)
 {
-	t_list		*head;
-	t_list		*next;
-	t_list		*nnext;
+	t_list	*head;
+	t_list	*next;
+	t_list	*nnext;
 
 	if (stack->size > 1)
 	{

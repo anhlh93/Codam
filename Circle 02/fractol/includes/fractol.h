@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/04 13:58:17 by haile         #+#    #+#                 */
-/*   Updated: 2025/07/07 17:04:29 by haile         ########   odam.nl         */
+/*   Updated: 2025/07/08 09:54:23 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@
 
 # define SCROLL_UP 5
 # define SCROLL_DOWN 4
+
+# define ZOOM_IN 0.75
+# define ZOOM_OUT 1.5
+
+# define MOUSE_ZOOM 0.5
+# define MOUSE_W_UP 4
+# define MOUSE_W_DOWN 5
 
 # define MOVE_DISTANCE 0.2
 # define MOVE_UP 1

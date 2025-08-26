@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: haile <haile@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/07/08 09:09:38 by haile         #+#    #+#                 */
+/*   Updated: 2025/07/08 09:27:15 by haile         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 
 static t_stack	*new_stack(void)
@@ -14,6 +26,7 @@ static t_stack	*new_stack(void)
 		exit_error(NULL, NULL);
 	return (temp);
 }
+
 void	free_stack(t_stack *stack)
 {
 	if (!stack)
@@ -22,7 +35,7 @@ void	free_stack(t_stack *stack)
 	free(stack);
 }
 
-static void create_stack(t_stack *a, t_stack *b, int ac, char **av)
+static void	create_stack(t_stack *a, t_stack *b, int ac, char **av)
 {
 	long	i;
 	t_val	*val;
@@ -56,7 +69,12 @@ int	main(int ac, char **av)
 	b = new_stack();
 	if (a && b)
 	{
-		create_stack(a, b, ac, av);
+		if (ac == 2)
+		{
+			create_stack_from_split(a, b, av[1]);
+		}
+		else
+			create_stack(a, b, ac, av);
 		sort(a, b);
 	}
 	free_stack(a);
