@@ -1,0 +1,20 @@
+#05/09/25
+## MAX
+- BULLETINS: Add ft_unset, ft_export (fix), ft_env, ft_exit
+- TESTING: cd, pwd, echo, export command
+- LIBFT: add ft_arrdup; ft_free_arr; ft_malloc; ft_strjoin_free.c
+
+#27/08/25
+## MAX
+- BULLETINS: Add ft_export, ft_pwd, ft_echo
+- EXECUTORS: Finish for now
+
+
+----------------------------------------------------------------------------------
+
+#10/09/25
+## MAX
+- LIBFT: edited some of the added libft functions so they compile on my laptop
+- PARSING:	- expand_args is now fully working.
+			- concatonation roughly planned out.
+			- input/output redirect logic rough plans
