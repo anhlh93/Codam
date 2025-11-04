@@ -6,7 +6,7 @@
 /*   By: owhearn <owhearn@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/10/07 11:00:05 by owhearn       #+#    #+#                 */
-/*   Updated: 2025/09/08 11:50:43 by owhearn       ########   odam.nl         */
+/*   Updated: 2025/10/29 16:04:07 by owhearn       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_list
 int		ft_atoi(const char *ptr);
 void	*ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_chardup(const char s);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
@@ -70,7 +71,6 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-void	free_mem(char **mem);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
 int		nl_checker(const char *s);

@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/09/05 14:01:31 by haile         #+#    #+#                 */
-/*   Updated: 2025/10/14 12:19:21 by haile         ########   odam.nl         */
+/*   Updated: 2025/09/05 14:35:22 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,46 +19,46 @@
 #include "libft.h"
 
 // Forward declaration of your ft_echo function
-int ft_echo(t_commands *cmd);
+int ft_echo(t_cmds *cmd);
 
 /**
  * @brief Create a mock command structure for testing
  * @param args Null-terminated array of string arguments
- * @return Allocated t_commands structure
+ * @return Allocated t_cmds structure
  */
-t_commands *create_test_cmd(char **args)
+t_cmds *create_test_cmd(char **args)
 {
-    t_commands *cmd;
+    t_cmds *cmd;
     int argc = 0;
     
     // Count arguments
     while (args[argc])
         argc++;
     
-    cmd = malloc(sizeof(t_commands));
+    cmd = malloc(sizeof(t_cmds));
     if (!cmd)
         return NULL;
     
     // Initialize structure
-    cmd->args = malloc((argc + 1) * sizeof(char *));
-    if (!cmd->args) {
+    cmd->str = malloc((argc + 1) * sizeof(char *));
+    if (!cmd->str) {
         free(cmd);
         return NULL;
     }
     
     // Copy arguments
     for (int i = 0; i < argc; i++) {
-        cmd->args[i] = strdup(args[i]);
-        if (!cmd->args[i]) {
+        cmd->str[i] = strdup(args[i]);
+        if (!cmd->str[i]) {
             // Cleanup on allocation failure
             for (int j = 0; j < i; j++)
-                free(cmd->args[j]);
-            free(cmd->args);
+                free(cmd->str[j]);
+            free(cmd->str);
             free(cmd);
             return NULL;
         }
     }
-    cmd->args[argc] = NULL;
+    cmd->str[argc] = NULL;
     
     // Initialize other fields
     cmd->redir = NULL;
@@ -76,16 +76,16 @@ t_commands *create_test_cmd(char **args)
  * @brief Free a test command structure
  * @param cmd Command structure to free
  */
-void free_test_cmd(t_commands *cmd)
+void free_test_cmd(t_cmds *cmd)
 {
     if (!cmd)
         return;
     
-    if (cmd->args) {
-        for (int i = 0; cmd->args[i]; i++) {
-            free(cmd->args[i]);
+    if (cmd->str) {
+        for (int i = 0; cmd->str[i]; i++) {
+            free(cmd->str[i]);
         }
-        free(cmd->args);
+        free(cmd->str);
     }
     
     free(cmd);
@@ -113,7 +113,7 @@ void run_test(const char *test_name, char **args)
     printf("Your ft_echo output: ");
     fflush(stdout);
     
-    t_commands *cmd = create_test_cmd(args);
+    t_cmds *cmd = create_test_cmd(args);
     if (cmd) {
         int exit_code = ft_echo(cmd);
         printf("(exit: %d)", exit_code);
@@ -234,7 +234,7 @@ int main(void)
  *    gcc -Wall -Wextra -Werror test_echo.c [your_echo_file.c] [other_required_files.c] -o test_echo
  * 3. Run: ./test_echo
  * 
- * Your ft_echo function signature: int ft_echo(t_commands *cmd)
+ * Your ft_echo function signature: int ft_echo(t_cmds *cmd)
  * 
  * EXPECTED BEHAVIOR NOTES:
  * - Your implementation handles consecutive -n flags (good!)

@@ -6,7 +6,7 @@
 /*   By: owhearn <owhearn@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/10/07 11:00:05 by owhearn       #+#    #+#                 */
-/*   Updated: 2025/10/14 12:18:34 by haile         ########   odam.nl         */
+/*   Updated: 2025/09/05 13:58:11 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ typedef struct s_cmds
     int             pipefd[2];
     char            *heredoc;
     struct s_cmds   *next;
-} t_commands;
+} t_cmds;
 
 typedef struct s_shell
 {
     char    **env;
     char    **sorted_env;
     // bool    stop;
-    t_commands  *cmds;
+    t_cmds  *cmds;
 } t_shell;
 
 typedef struct s_list

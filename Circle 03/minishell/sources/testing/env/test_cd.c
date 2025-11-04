@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/09/05 15:13:23 by haile         #+#    #+#                 */
-/*   Updated: 2025/10/14 12:19:21 by haile         ########   odam.nl         */
+/*   Updated: 2025/09/05 15:13:24 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  *    gcc -Wall -Wextra -Werror test_cd.c ft_cd.c [other_required_files.c] libft/libft.a -o test_cd
  * 3. Run: ./test_cd
  *
- * Your ft_cd function signature: int ft_cd(t_commands *cmd, t_shell *shell)
+ * Your ft_cd function signature: int ft_cd(t_cmds *cmd, t_shell *shell)
  *
  * EXPECTED BEHAVIOR NOTES:
  * - cd with no arguments should go to HOME directory
@@ -50,10 +50,10 @@ typedef struct s_shell {
 
 typedef struct s_cmds {
     char **str;
-} t_commands;
+} t_cmds;
 
 // Add your function prototypes here
-int ft_cd(t_commands *cmd, t_shell *shell);
+int ft_cd(t_cmds *cmd, t_shell *shell);
 // Add other function prototypes as needed
 
 // Test utility functions
@@ -118,16 +118,16 @@ void free_test_env(char **env) {
 }
 
 // Create test command
-t_commands *create_test_cmd(char **args) {
-    t_commands *cmd = malloc(sizeof(t_commands));
+t_cmds *create_test_cmd(char **args) {
+    t_cmds *cmd = malloc(sizeof(t_cmds));
     if (!cmd) return NULL;
-    cmd->args = args;
+    cmd->str = args;
     return cmd;
 }
 
 // Run a single test
 void run_test(const char *test_name, char **args, t_shell *shell) {
-    t_commands *cmd;
+    t_cmds *cmd;
     int result;
     
     print_separator(test_name);

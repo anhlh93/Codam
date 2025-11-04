@@ -6,7 +6,7 @@
  *    gcc -Wall -Wextra -Werror test_unset.c ft_unset.c [libft files] [other_required_files.c] -o test_unset
  * 3. Run: ./test_unset
  *
- * Your ft_unset function signature: int ft_unset(t_commands *cmd, t_shell *shell)
+ * Your ft_unset function signature: int ft_unset(t_cmds *cmd, t_shell *shell)
  *
  * EXPECTED BEHAVIOR NOTES:
  * - unset with no arguments should return 0 (success) and do nothing
@@ -38,14 +38,14 @@
 // Mock structures - adjust these to match your actual implementation
 typedef struct s_cmds {
     char **str;  // Array of command arguments
-} t_commands;
+} t_cmds;
 
 typedef struct s_shell {
     char **env;  // Environment variables array
 } t_shell;
 
 // Your function prototype
-int ft_unset(t_commands *cmd, t_shell *shell);
+int ft_unset(t_cmds *cmd, t_shell *shell);
 
 // Helper functions for testing
 char **create_test_env(void)
@@ -109,7 +109,7 @@ void test_no_arguments(void)
     t_shell shell;
     shell.env = create_test_env();
     
-    t_commands cmd;
+    t_cmds cmd;
     char *args[] = {"unset", NULL};
     cmd.str = args;
     
@@ -132,7 +132,7 @@ void test_single_existing_var(void)
     t_shell shell;
     shell.env = create_test_env();
     
-    t_commands cmd;
+    t_cmds cmd;
     char *args[] = {"unset", "HOME", NULL};
     cmd.str = args;
     
@@ -158,7 +158,7 @@ void test_multiple_existing_vars(void)
     t_shell shell;
     shell.env = create_test_env();
     
-    t_commands cmd;
+    t_cmds cmd;
     char *args[] = {"unset", "PATH", "USER", NULL};
     cmd.str = args;
     
@@ -190,7 +190,7 @@ void test_nonexistent_var(void)
     t_shell shell;
     shell.env = create_test_env();
     
-    t_commands cmd;
+    t_cmds cmd;
     char *args[] = {"unset", "NONEXISTENT", NULL};
     cmd.str = args;
     
@@ -214,7 +214,7 @@ void test_partial_name_bug(void)
     t_shell shell;
     shell.env = create_test_env();
     
-    t_commands cmd;
+    t_cmds cmd;
     char *args[] = {"unset", "PATH", NULL};
     cmd.str = args;
     
@@ -245,7 +245,7 @@ void test_mixed_existing_nonexistent(void)
     t_shell shell;
     shell.env = create_test_env();
     
-    t_commands cmd;
+    t_cmds cmd;
     char *args[] = {"unset", "HOME", "FAKE1", "USER", "FAKE2", NULL};
     cmd.str = args;
     
@@ -278,7 +278,7 @@ void test_empty_environment(void)
     shell.env = malloc(sizeof(char*));
     shell.env[0] = NULL;  // Empty environment
     
-    t_commands cmd;
+    t_cmds cmd;
     char *args[] = {"unset", "ANYTHING", NULL};
     cmd.str = args;
     

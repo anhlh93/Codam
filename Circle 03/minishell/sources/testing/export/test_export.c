@@ -6,7 +6,7 @@
 /*   By: haile <haile@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/09/05 15:03:36 by haile         #+#    #+#                 */
-/*   Updated: 2025/10/14 12:19:21 by haile         ########   odam.nl         */
+/*   Updated: 2025/09/05 15:03:37 by haile         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  *    gcc -Wall -Wextra -Werror test_export.c [your_export_file.c] [other_required_files.c] -o test_export
  * 3. Run: ./test_export
  * 
- * Your ft_export function signature: int ft_export(t_commands *cmd, t_shell *shell, char *str)
+ * Your ft_export function signature: int ft_export(t_cmds *cmd, t_shell *shell, char *str)
  * 
  * EXPECTED BEHAVIOR NOTES:
  * - export without args should print sorted environment (like bash)
@@ -40,7 +40,7 @@
 // Mock structures for testing (replace with your actual headers)
 typedef struct s_cmds {
     char **str;  // Array of command arguments
-} t_commands;
+} t_cmds;
 
 typedef struct s_shell {
     char **env;
@@ -48,7 +48,7 @@ typedef struct s_shell {
 } t_shell;
 
 // Your function prototype (implement this in your export file)
-int ft_export(t_commands *cmd, t_shell *shell, char *str);
+int ft_export(t_cmds *cmd, t_shell *shell, char *str);
 
 // Test helper functions
 t_shell *init_test_shell(char **envp)
@@ -87,9 +87,9 @@ void free_test_shell(t_shell *shell)
     free(shell);
 }
 
-t_commands *create_test_cmd(char **args)
+t_cmds *create_test_cmd(char **args)
 {
-    t_commands *cmd = malloc(sizeof(t_commands));
+    t_cmds *cmd = malloc(sizeof(t_cmds));
     int count = 0;
     int i = 0;
     
@@ -97,28 +97,28 @@ t_commands *create_test_cmd(char **args)
     while (args[count])
         count++;
     
-    cmd->args = malloc(sizeof(char*) * (count + 1));
+    cmd->str = malloc(sizeof(char*) * (count + 1));
     
     // Copy arguments
     while (i < count)
     {
-        cmd->args[i] = strdup(args[i]);
+        cmd->str[i] = strdup(args[i]);
         i++;
     }
-    cmd->args[i] = NULL;
+    cmd->str[i] = NULL;
     
     return cmd;
 }
 
-void free_test_cmd(t_commands *cmd)
+void free_test_cmd(t_cmds *cmd)
 {
     int i = 0;
-    while (cmd->args[i])
+    while (cmd->str[i])
     {
-        free(cmd->args[i]);
+        free(cmd->str[i]);
         i++;
     }
-    free(cmd->args);
+    free(cmd->str);
     free(cmd);
 }
 
@@ -136,7 +136,7 @@ void print_env(t_shell *shell)
 
 void test_export_case(t_shell *shell, char **args, char *description)
 {
-    t_commands *cmd = create_test_cmd(args);
+    t_cmds *cmd = create_test_cmd(args);
     int result;
     
     printf("=== %s ===\n", description);
