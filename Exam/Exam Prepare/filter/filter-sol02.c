@@ -3,7 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef BUFFER_SIZE
 #define BUFFER_SIZE 10
+#endif 
 
 void    search_and_replace(char *line, char *str)
 {
@@ -11,7 +13,7 @@ void    search_and_replace(char *line, char *str)
         return ;
     int i;
     int j;
-    int match
+    int match;
 
     i = 0;
     while(line[i])

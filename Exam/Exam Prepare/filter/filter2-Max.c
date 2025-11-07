@@ -11,9 +11,11 @@ void search_and_replace(char *line, char *str)
 	int j = 0;
 	int match = 1;
 	int i = 0;
+	
 	while (line[i])
 	{
 		j = 0;
+		match = 1;
 		while (str[j])
 		{
 			if (line[i + j] != str[j])
@@ -67,13 +69,13 @@ int main(int ac, char **av)
 				line[line_pos] = '\0';
 				search_and_replace(line, av[1]);
 				printf("%s\n", line);
+				i++;
 				line_pos = 0;
 			}
 			else
 			{
-				line[line_pos++] = buffer[i];
+				line[line_pos++] = buffer[i++];
 			}
-			i++;
 		}
 	}
 	return 0;
